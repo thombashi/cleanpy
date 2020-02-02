@@ -99,9 +99,18 @@ Command help
 
 Installation
 ============================================
+
+Installation: pip
+--------------------------------------------
 ::
 
     pip install cleanpy
+
+Installation: snap
+--------------------------------------------
+::
+
+    sudo snap install cleanpy
 
 
 Dependencies
