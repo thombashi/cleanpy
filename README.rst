@@ -1,100 +1,73 @@
-.. contents:: **project_name**
+.. contents:: **cleanpy**
    :backlinks: top
    :depth: 2
 
-
-Python project template: TODO
-============================================
-- Click ``[Use this template]`` button to create a new repository
-- Replace ``project_name`` within the repository to an arbitrary name
-- Modify authorized information at ``<project_name>/__version__.py``
-
-
-********************************************************
-
-README
-
 Summary
 ============================================
-
-.. image:: https://img.shields.io/travis/thombashi/python-project-template/master.svg?label=Linux/macOS%20CI
-    :target: https://travis-ci.org/thombashi/python-project-template
-    :alt: Linux/macOS CI status
-
-.. image:: https://img.shields.io/appveyor/ci/thombashi/python-project-template/master.svg?label=Windows%20CI
-    :target: https://ci.appveyor.com/project/thombashi/python-project-template/branch/master
-    :alt: Windows CI status
-
-.. image:: https://coveralls.io/repos/github/thombashi/python-project-template/badge.svg?branch=master
-    :target: https://coveralls.io/github/thombashi/python-project-template?branch=master
-    :alt: Test coverage: coveralls
-
-.. image:: https://codecov.io/gh/thombashi/python-project-template/branch/master/graph/badge.svg
-  :target: https://codecov.io/gh/thombashi/python-project-template
-    :alt: Test coverage: codecov
-
+cleanpy is a CLI command to remove cache files and temporary files that related to Python.
 
 Usage
 ============================================
+::
 
-:Sample Code:
-    .. code-block:: python
+    cleanpy DIR_PATH [DIR_PATH ...]
 
-        # Sample code
+``cleanpy`` will remove cache files and temporaly files under the DIR_PATH
 
-:Output:
-    .. code-block::
+Reove files/directories are as follows:
 
-        # Output
+- files:
+    - ``.coverage``
+    - ``coverage.xml``
+    - ``nosetests.xml``
+    - ``*.manifest``
+    - ``*.spec``
+    - ``*.pyc``
+    - ``*.pyo``
 
+- directories:
+    - ``__pycache__``
+    - ``.eggs``
+    - ``.mypy_cache``
+    - ``.nox``
+    - ``.pyre``
+    - ``.pytest_cache``
+    - ``.pytype``
+    - ``.tox``
+    - ``.venv``
+    - ``*.egg-info``
+
+If ``--include-build-cache`` option is specified, also remove the following directories:
+
+- ``build``
+- ``dist``
+- ``docs/_build``
+
+Following directories are excluded from the search:
+
+- ``.git``
+- ``.hg``
+- ``.svn``
+- ``node_modules``
+
+Command help
+--------------------------------------------
 
 Installation
 ============================================
 ::
 
-    pip install <project_name>
+    pip install cleanpy
 
 
 Dependencies
 ============================================
-Python 3.5+
+Python 3.6+
 
-********************************************************
+- no external package dependencies.
+- platform independent
 
-Development
+
+Related project
 ============================================
-
-Setup
---------------------------------------------
-::
-
-    $ make setup
-
-Running tests
---------------------------------------------
-::
-
-    $ tox
-
-Code formatting
---------------------------------------------
-::
-
-    $ make fmt
-
-Linting
---------------------------------------------
-::
-
-    $ make check
-
-Release a package to PyPI
---------------------------------------------
-::
-
-    $ make build
-    $ make release
-
-- Prerequisites for release:
-    - PyPI account
-    - GPG key
+pyclean/py3clean: remove cache files with a more conservative approach

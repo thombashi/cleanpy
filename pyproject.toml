@@ -17,7 +17,7 @@ exclude = '''
 '''
 
 [tool.coverage.run]
-source = ['project_name']
+source = ['cleanpy']
 branch = true
 
 [tool.coverage.report]

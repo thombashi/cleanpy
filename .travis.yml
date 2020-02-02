@@ -5,10 +5,6 @@ cache: pip
 matrix:
   include:
     - os: linux
-      python: 3.5
-      env: TOXENV=py35
-
-    - os: linux
       python: 3.6
       env: TOXENV=py36
 
@@ -21,12 +17,8 @@ matrix:
       env: TOXENV=py38
 
     - os: linux
-      python: 3.7
-      env: TOXENV=cov
-      after_success:
-        - travis_retry pip install codecov coveralls
-        - codecov
-        - coveralls
+      python: pypy3
+      env: TOXENV=pypy3
 
     - os: osx
       language: generic
