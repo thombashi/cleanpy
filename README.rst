@@ -22,10 +22,6 @@ cleanpy is a CLI command to remove cache files and temporary files that related 
     :target: https://travis-ci.org/thombashi/cleanpy
     :alt: Linux/macOS CI status
 
-.. image:: https://img.shields.io/appveyor/ci/thombashi/cleanpy/master.svg?label=Windows%20CI
-    :target: https://ci.appveyor.com/project/thombashi/cleanpy/branch/master
-    :alt: Windows CI status
-
 
 Usage
 ============================================
@@ -113,8 +109,3 @@ Python 3.6+
 
 - no external package dependencies.
 - platform independent
-
-
-Related project
-============================================
-pyclean/py3clean: remove cache files with a more conservative approach
