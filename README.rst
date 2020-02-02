@@ -44,6 +44,7 @@ Reove files/directories are as follows:
 
 - directories:
     - ``__pycache__``
+    - ``.cache``
     - ``.eggs``
     - ``.mypy_cache``
     - ``.nox``
