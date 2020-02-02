@@ -105,9 +105,16 @@ def get_logger(log_level: int) -> Logger:
     return logger
 
 
+def extract_log_level(log_level: int, dry_run: bool) -> int:
+    if dry_run:
+        return min(log_level, logging.INFO)
+
+    return log_level
+
+
 def main():
     options = parse_option()
-    logger = get_logger(options.log_level)
+    logger = get_logger(extract_log_level(options.log_level, options.dry_run))
     manipulator = DirEntryManipulator(
         logger, follow_symlinks=options.follow_symlinks, dry_run=options.dry_run
     )
