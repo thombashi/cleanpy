@@ -137,6 +137,9 @@ def main():
     for entry_type, count in manipulator.remove_count.items():
         logger.info("removed {} {}".format(count, entry_type))
 
+    for entry_type, count in manipulator.error_count.items():
+        logger.error("failed to remove {} {}".format(count, entry_type))
+
 
 if __name__ == "__main__":
     main()

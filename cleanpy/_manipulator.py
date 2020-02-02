@@ -13,6 +13,7 @@ class DirEntryManipulator:
         self.__dry_run = dry_run
 
         self.remove_count: Dict[str, int] = defaultdict(int)
+        self.error_count: Dict[str, int] = defaultdict(int)
 
         logger.debug("follow_symlinks: {}".format(follow_symlinks))
         logger.debug("dry run: {}".format(dry_run))
@@ -32,7 +33,7 @@ class DirEntryManipulator:
                 self.remove_count["directories"] += 1
             except OSError as e:
                 self.__logger.error("failed to remove a directory '{}': {}".format(entry.path, e))
-
+                self.error_count["directories"] += 1
             return
 
         if self.is_file(entry):
@@ -44,6 +45,7 @@ class DirEntryManipulator:
                 return
             except OSError as e:
                 self.__logger.error("failed to remove a file '{}': {}".format(entry.path, e))
+                self.error_count["files"] += 1
 
             return
 
