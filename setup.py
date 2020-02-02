@@ -46,7 +46,7 @@ setuptools.setup(
     author_email=pkg_info["__email__"],
     description="cleanpy is a CLI command to remove cache files and temporary files that related to Python.",
     include_package_data=True,
-    keywords=["clean"],
+    keywords=["cleaner", "command"],
     license=pkg_info["__license__"],
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/x-rst",
