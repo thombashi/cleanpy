@@ -30,9 +30,10 @@ class DirEntryManipulator:
                 if not self.__dry_run:
                     shutil.rmtree(entry.path)
                 self.remove_count["directories"] += 1
-                return
             except OSError as e:
-                self.__logger.error(e)
+                self.__logger.error("failed to remove a directory '{}': {}".format(entry.path, e))
+
+            return
 
         if self.is_file(entry):
             self.__logger.info("remove file: {}".format(entry.path))
@@ -42,6 +43,8 @@ class DirEntryManipulator:
                 self.remove_count["files"] += 1
                 return
             except OSError as e:
-                self.__logger.error(e)
+                self.__logger.error("failed to remove a file '{}': {}".format(entry.path, e))
+
+            return
 
         self.__logger.error("unknown entry: {}".format(entry.path))
