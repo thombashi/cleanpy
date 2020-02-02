@@ -108,5 +108,5 @@ Dependencies
 ============================================
 Python 3.6+
 
-- no external package dependencies.
+- no external package dependencies
 - platform independent
