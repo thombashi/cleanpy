@@ -1,0 +1,28 @@
+name: cleanpy
+base: core18
+version: git
+summary: CLI command to remove cache files and temporary files that related to Python
+description: |
+  cleanpy is a CLI command to remove cache files and temporary files that related to Python.
+license: MIT
+
+grade: stable # devel/stable
+confinement: strict # devmode/strict
+
+architectures:
+  - build-on: amd64
+  - build-on: i386
+  - build-on: ppc64el
+  - build-on: arm64
+  - build-on: armhf
+
+parts:
+  cleanpy:
+    plugin: python
+    source: .
+
+apps:
+  cleanpy:
+    command: cleanpy
+    plugs:
+      - home
