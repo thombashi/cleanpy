@@ -1,0 +1,49 @@
+[tool.black]
+line-length = 100
+exclude = '''
+/(
+      \.eggs
+    | \.git
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | \.pytype
+    | _build
+    | buck-out
+    | build
+    | dist
+)/
+| docs/conf.py
+'''
+
+[tool.coverage.run]
+source = ['project_name']
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+precision = 1
+exclude_lines = [
+    'except ImportError',
+    'raise NotImplementedError',
+    'pass',
+    'ABCmeta',
+    'abstractmethod',
+    'abstractproperty',
+    'abstractclassmethod',
+    'warnings.warn',
+]
+
+[tool.isort]
+dont_skip = "*/**/__init__.py"
+known_third_party = [
+]
+include_trailing_comma = true
+line_length = 100
+lines_after_imports = 2
+multi_line_output = 3
+skip_glob = [
+    '*/.eggs/*',
+    '*/.pytype/*',
+    '*/.tox/*',
+]
