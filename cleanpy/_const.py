@@ -18,6 +18,7 @@ RE_REMOVE_DIR = re.compile(
     "|".join(
         [
             r"__pycache__",
+            r"^\.cache",
             r"^\.eggs",
             r"^\.mypy_cache$",
             r"^\.nox$",
