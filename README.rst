@@ -31,7 +31,7 @@ Usage
 
 ``cleanpy`` will remove cache files and temporaly files under the DIR_PATH
 
-Reove files/directories are as follows:
+Remove files/directories are as follows:
 
 - files:
     - ``.coverage``
@@ -111,6 +111,10 @@ Installation: snap
 ::
 
     sudo snap install cleanpy
+
+.. image:: https://snapcraft.io//cleanpy/badge.svg
+    :target: https://snapcraft.io/cleanpy
+    :alt: snapcraft status
 
 
 Dependencies
