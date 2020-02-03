@@ -118,5 +118,6 @@ dmypy.json
 # User settings
 _sandbox/
 *_profile
+*.snap
 Untitled.ipynb
 
