@@ -8,9 +8,10 @@ import logging
 from argparse import ArgumentParser, Namespace, RawDescriptionHelpFormatter
 from logging import Logger
 from textwrap import dedent
+from typing import AbstractSet
 
 from .__version__ import __version__
-from ._const import BUILD_CACHE_DIRS, IGNORE_DIRS, LogLevel
+from ._const import BUILD_CACHE_DIRS, IGNORE_DIRS, Category, LogLevel
 from ._finder import Finder
 from ._manipulator import DirEntryManipulator
 
@@ -112,6 +113,15 @@ def extract_log_level(log_level: int, dry_run: bool) -> int:
     return log_level
 
 
+def extract_categories(options) -> AbstractSet[str]:
+    category_set = set([Category.CACHE])
+
+    if options.include_build_cache:
+        category_set.add(Category.BUILD)
+
+    return category_set
+
+
 def main():
     options = parse_option()
     logger = get_logger(extract_log_level(options.log_level, options.dry_run))
@@ -122,7 +132,7 @@ def main():
         logger,
         manipulator=manipulator,
         exclude_pattern=options.exclude,
-        include_build_cache=options.include_build_cache,
+        include_categories=extract_categories(options),
     )
 
     for target_dir in options.target_dirs:

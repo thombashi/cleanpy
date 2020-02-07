@@ -2,15 +2,9 @@ import os
 import re
 from logging import Logger
 from os import DirEntry
-from typing import List, Optional, Sequence
+from typing import AbstractSet, List, Optional, Sequence
 
-from ._const import (
-    BUILD_CACHE_DIRS,
-    IGNORE_DIRS,
-    RE_REMOVE_DIR,
-    RE_REMOVE_FILE,
-    RE_SPHINX_BUILD_DIR,
-)
+from ._const import IGNORE_DIRS, RE_SPHINX_BUILD_DIR, TARGETS, Category
 from ._manipulator import DirEntryManipulator
 
 
@@ -20,32 +14,33 @@ class Finder:
         logger: Logger,
         manipulator: DirEntryManipulator,
         exclude_pattern: Optional[str],
-        include_build_cache: bool,
+        include_categories: AbstractSet[str],
     ) -> None:
         self.__logger = logger
         self.__manipulator = manipulator
-        self.__include_build_cache = include_build_cache
+        self.__include_categories = include_categories
 
         self.__exclude_pattern = re.compile(exclude_pattern) if exclude_pattern else None
         self.__delete_entries: List[DirEntry] = []
 
         logger.debug(f"exclude_pattern: {exclude_pattern}")
-        logger.debug(f"include_build_cache: {include_build_cache}")
+        logger.debug(f"include_categories: {include_categories}")
+
+    def __is_remove_category(self, category: str) -> bool:
+        return category in self.__include_categories
 
     def is_remove_entry(self, entry: DirEntry) -> bool:
-        if self.__manipulator.is_file(entry) and RE_REMOVE_FILE.search(entry.name) is not None:
-            return True
+        targets = TARGETS.get(self.__manipulator.get_entry_type(entry))
+        if not targets:
+            return False
 
-        if self.__manipulator.is_dir(entry):
-            if RE_REMOVE_DIR.search(entry.name) is not None:
+        for target in targets:
+            if target.category in self.__include_categories and target.regexp.search(entry.name):
                 return True
 
-            if self.__include_build_cache:
-                if entry.name in BUILD_CACHE_DIRS:
-                    return True
-
-                if entry.name == "_build" and RE_SPHINX_BUILD_DIR.search(entry.path) is not None:
-                    return True
+        if Category.BUILD in self.__include_categories:
+            if entry.name == "_build" and RE_SPHINX_BUILD_DIR.search(entry.path) is not None:
+                return True
 
         return False
 
