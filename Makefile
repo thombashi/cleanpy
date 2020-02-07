@@ -10,7 +10,7 @@ build:
 .PHONY: check
 check:
 	@tox -e lint
-	-travis lint
+	travis lint
 
 .PHONY: clean
 clean:
@@ -27,4 +27,4 @@ release:
 
 .PHONY: setup
 setup:
-	@pip install --upgrade -e . tox
+	@pip install --upgrade -e .[test] tox
