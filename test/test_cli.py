@@ -6,13 +6,13 @@ from subprocrunner import SubprocessRunner
 
 def print_result(stdout, stderr, expected=None):
     if expected:
-        print("[expected]\n{}".format(expected))
+        print(f"[expected]\n{expected}")
 
-    print("[stdout]\n{}".format(stdout))
-    print("[stderr]\n{}".format(stderr))
+    print(f"[stdout]\n{stdout}")
+    print(f"[stderr]\n{stderr}")
 
 
-class Test_cli(object):
+class Test_cli:
     def test_normal_help(self, tmpdir):
         runner = SubprocessRunner(["cleanpy", "-h"])
 

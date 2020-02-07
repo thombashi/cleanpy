@@ -29,8 +29,8 @@ class Finder:
         self.__exclude_pattern = re.compile(exclude_pattern) if exclude_pattern else None
         self.__delete_entries: List[DirEntry] = []
 
-        logger.debug("exclude_pattern: {}".format(exclude_pattern))
-        logger.debug("include_build_cache: {}".format(include_build_cache))
+        logger.debug(f"exclude_pattern: {exclude_pattern}")
+        logger.debug(f"include_build_cache: {include_build_cache}")
 
     def is_remove_entry(self, entry: DirEntry) -> bool:
         if self.__manipulator.is_file(entry) and RE_REMOVE_FILE.search(entry.name) is not None:
@@ -51,7 +51,7 @@ class Finder:
 
     def is_skip_entry(self, entry: DirEntry) -> bool:
         if self.__exclude_pattern and self.__exclude_pattern.search(entry.name):
-            self.__logger.debug("match exclude pattern: {}".format(entry.path))
+            self.__logger.debug(f"match exclude pattern: {entry.path}")
             return True
 
         if self.__manipulator.is_dir(entry) and entry.name in IGNORE_DIRS:
@@ -63,11 +63,11 @@ class Finder:
         with os.scandir(root) as it:
             for entry in it:
                 if self.is_skip_entry(entry):
-                    self.__logger.debug("skip entry: {}".format(entry.path))
+                    self.__logger.debug(f"skip entry: {entry.path}")
                     continue
 
                 if self.is_remove_entry(entry):
-                    self.__logger.debug("add delete target: {}".format(entry.path))
+                    self.__logger.debug(f"add delete target: {entry.path}")
                     self.__delete_entries.append(entry)
                     continue
 

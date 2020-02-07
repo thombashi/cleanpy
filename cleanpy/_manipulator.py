@@ -15,8 +15,8 @@ class DirEntryManipulator:
         self.remove_count: Dict[str, int] = defaultdict(int)
         self.error_count: Dict[str, int] = defaultdict(int)
 
-        logger.debug("follow_symlinks: {}".format(follow_symlinks))
-        logger.debug("dry run: {}".format(dry_run))
+        logger.debug(f"follow_symlinks: {follow_symlinks}")
+        logger.debug(f"dry run: {dry_run}")
 
     def is_dir(self, entry: DirEntry) -> bool:
         return entry.is_dir(follow_symlinks=self.__follow_symlinks)
@@ -26,27 +26,27 @@ class DirEntryManipulator:
 
     def remove(self, entry: DirEntry) -> None:
         if self.is_dir(entry):
-            self.__logger.info("remove directory: {}".format(entry.path))
+            self.__logger.info(f"remove directory: {entry.path}")
             try:
                 if not self.__dry_run:
                     shutil.rmtree(entry.path)
                 self.remove_count["directories"] += 1
             except OSError as e:
-                self.__logger.error("failed to remove a directory '{}': {}".format(entry.path, e))
+                self.__logger.error(f"failed to remove a directory '{entry.path}': {e}")
                 self.error_count["directories"] += 1
             return
 
         if self.is_file(entry):
-            self.__logger.info("remove file: {}".format(entry.path))
+            self.__logger.info(f"remove file: {entry.path}")
             try:
                 if not self.__dry_run:
                     os.remove(entry.path)
                 self.remove_count["files"] += 1
                 return
             except OSError as e:
-                self.__logger.error("failed to remove a file '{}': {}".format(entry.path, e))
+                self.__logger.error(f"failed to remove a file '{entry.path}': {e}")
                 self.error_count["files"] += 1
 
             return
 
-        self.__logger.error("unknown entry: {}".format(entry.path))
+        self.__logger.error(f"unknown entry: {entry.path}")

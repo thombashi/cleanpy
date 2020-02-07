@@ -126,19 +126,19 @@ def main():
     )
 
     for target_dir in options.target_dirs:
-        logger.debug("scan dir: {}".format(target_dir))
+        logger.debug(f"scan dir: {target_dir}")
 
         try:
             for entry in finder.traverse(target_dir):
                 manipulator.remove(entry)
-        except (IOError, OSError) as e:
+        except OSError as e:
             logger.error(e)
 
     for entry_type, count in manipulator.remove_count.items():
-        logger.info("removed {} {}".format(count, entry_type))
+        logger.info(f"removed {count} {entry_type}")
 
     for entry_type, count in manipulator.error_count.items():
-        logger.error("failed to remove {} {}".format(count, entry_type))
+        logger.error(f"failed to remove {count} {entry_type}")
 
 
 if __name__ == "__main__":
