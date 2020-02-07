@@ -121,3 +121,4 @@ _sandbox/
 *.snap
 Untitled.ipynb
 
+.pytype/
