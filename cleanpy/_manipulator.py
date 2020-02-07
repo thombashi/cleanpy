@@ -5,6 +5,8 @@ from logging import Logger
 from os import DirEntry
 from typing import Dict
 
+from ._const import EntryType
+
 
 class DirEntryManipulator:
     def __init__(self, logger: Logger, follow_symlinks: bool, dry_run: bool):
@@ -23,6 +25,15 @@ class DirEntryManipulator:
 
     def is_file(self, entry: DirEntry) -> bool:
         return entry.is_file(follow_symlinks=self.__follow_symlinks)
+
+    def get_entry_type(self, entry: DirEntry) -> EntryType:
+        if self.is_dir(entry):
+            return EntryType.DIR
+
+        if self.is_file(entry):
+            return EntryType.FILE
+
+        return EntryType.UNDELETABLE
 
     def remove(self, entry: DirEntry) -> None:
         if self.is_dir(entry):

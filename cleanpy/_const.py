@@ -1,13 +1,15 @@
+import enum
 import logging
 import re
 
 
-RE_REMOVE_FILE = re.compile(
-    "|".join(
-        [
-            r"^\.coverage$",
-            r"^coverage\.xml$",
-            r"^nosetests\.xml$",
+@enum.unique
+class EntryType(enum.Enum):
+    DIR = "DIR"
+    FILE = "FILE"
+    UNDELETABLE = "UNDELETABLE"
+
+
             r".+\.manifest$",
             r".+\.spec$",
             r".+\.py[co]$",
