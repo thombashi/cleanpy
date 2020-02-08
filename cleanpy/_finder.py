@@ -2,9 +2,9 @@ import os
 import re
 from logging import Logger
 from os import DirEntry
-from typing import AbstractSet, List, Optional, Sequence
+from typing import AbstractSet, Dict, List, Optional, Sequence
 
-from ._const import IGNORE_DIRS, RE_SPHINX_BUILD_DIR, TARGETS, Category
+from ._const import IGNORE_DIRS, RE_SPHINX_BUILD_DIR, TARGETS, Category, EntryType, RemoveTarget
 from ._manipulator import DirEntryManipulator
 
 
@@ -20,6 +20,7 @@ class Finder:
         self.__manipulator = manipulator
         self.__include_categories = include_categories
 
+        self.__target_map = self.__make_target_map()
         self.__exclude_pattern = re.compile(exclude_pattern) if exclude_pattern else None
         self.__delete_entries: List[DirEntry] = []
 
@@ -30,12 +31,8 @@ class Finder:
         return category in self.__include_categories
 
     def is_remove_entry(self, entry: DirEntry) -> bool:
-        targets = TARGETS.get(self.__manipulator.get_entry_type(entry))
-        if not targets:
-            return False
-
-        for target in targets:
-            if target.category in self.__include_categories and target.regexp.search(entry.name):
+        for target in self.__target_map.get(self.__manipulator.get_entry_type(entry), []):
+            if target.regexp.search(entry.name):
                 return True
 
         if Category.BUILD in self.__include_categories:
@@ -70,3 +67,14 @@ class Finder:
                     self.traverse(entry.path)
 
         return self.__delete_entries
+
+    def __make_target_map(self) -> Dict[EntryType, List[RemoveTarget]]:
+        target_map: Dict[EntryType, List[RemoveTarget]] = {}
+
+        for target in TARGETS:
+            if target.category not in self.__include_categories:
+                continue
+
+            target_map.setdefault(target.target_type, []).append(target)
+
+        return target_map

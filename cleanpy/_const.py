@@ -14,6 +14,7 @@ class EntryType(enum.Enum):
 class RemoveTarget(NamedTuple):
     category: str
     name: str
+    target_type: EntryType
     regexp: Pattern[str]
 
 
@@ -26,55 +27,62 @@ class Category:
     ALL = [BUILD, CACHE, ENV, METADATA, TEST]
 
 
-TARGETS = {
-    EntryType.FILE: [
-        RemoveTarget(
-            category=Category.CACHE, name="Python", regexp=re.compile("|".join([r".+\.py[co]$",]))
-        ),
-        RemoveTarget(
-            category=Category.BUILD,
-            name="pyinstaller",
-            regexp=re.compile("|".join([r".+\.manifest$", r".+\.spec$",])),
-        ),
-        RemoveTarget(
-            category=Category.TEST,
-            name="test results",
-            regexp=re.compile(
-                "|".join([r"^\.coverage$", r"^coverage\.xml$", r"^nosetests\.xml$",])
-            ),
-        ),
-    ],
-    EntryType.DIR: [
-        RemoveTarget(
-            category=Category.CACHE,
-            name="Python",
-            regexp=re.compile("|".join([r"__pycache__", r"^\.cache"])),
-        ),
-        RemoveTarget(
-            category=Category.CACHE,
-            name="pytest",
-            regexp=re.compile("|".join([r"^\.pytest_cache$",])),
-        ),
-        RemoveTarget(
-            category=Category.CACHE, name="mypy", regexp=re.compile("|".join([r"^\.mypy_cache$",]))
-        ),
-        RemoveTarget(
-            category=Category.METADATA,
-            name="Python",
-            regexp=re.compile("|".join([r"^\.eggs", r".+\.egg-info$",])),
-        ),
-        RemoveTarget(
-            category=Category.ENV,
-            name="virtual env",
-            regexp=re.compile("|".join([r"^\.nox$", r"^\.tox$", r"^\.venv$",])),
-        ),
-        RemoveTarget(
-            category=Category.METADATA,
-            name="type checker",
-            regexp=re.compile("|".join([r"^\.pyre$", r"^\.pytype$",])),
-        ),
-    ],
-}
+TARGETS = (
+    RemoveTarget(
+        category=Category.BUILD,
+        name="pyinstaller",
+        target_type=EntryType.FILE,
+        regexp=re.compile("|".join([r".+\.manifest$", r".+\.spec$",])),
+    ),
+    RemoveTarget(
+        category=Category.CACHE,
+        name="Python",
+        target_type=EntryType.FILE,
+        regexp=re.compile("|".join([r".+\.py[co]$",])),
+    ),
+    RemoveTarget(
+        category=Category.CACHE,
+        name="Python",
+        target_type=EntryType.DIR,
+        regexp=re.compile("|".join([r"__pycache__", r"^\.cache"])),
+    ),
+    RemoveTarget(
+        category=Category.CACHE,
+        name="pytest",
+        target_type=EntryType.DIR,
+        regexp=re.compile("|".join([r"^\.pytest_cache$",])),
+    ),
+    RemoveTarget(
+        category=Category.CACHE,
+        name="mypy",
+        target_type=EntryType.DIR,
+        regexp=re.compile("|".join([r"^\.mypy_cache$",])),
+    ),
+    RemoveTarget(
+        category=Category.ENV,
+        name="virtual env",
+        target_type=EntryType.DIR,
+        regexp=re.compile("|".join([r"^\.nox$", r"^\.tox$", r"^\.venv$",])),
+    ),
+    RemoveTarget(
+        category=Category.METADATA,
+        name="Python",
+        target_type=EntryType.DIR,
+        regexp=re.compile("|".join([r"^\.eggs", r".+\.egg-info$",])),
+    ),
+    RemoveTarget(
+        category=Category.METADATA,
+        name="type checker",
+        target_type=EntryType.DIR,
+        regexp=re.compile("|".join([r"^\.pyre$", r"^\.pytype$",])),
+    ),
+    RemoveTarget(
+        category=Category.TEST,
+        name="test results",
+        target_type=EntryType.FILE,
+        regexp=re.compile("|".join([r"^\.coverage$", r"^coverage\.xml$", r"^nosetests\.xml$",])),
+    ),
+)
 
 RE_SPHINX_BUILD_DIR = re.compile("docs/_build$")
 
