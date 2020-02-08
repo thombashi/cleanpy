@@ -4,7 +4,7 @@
 
 Summary
 ============================================
-cleanpy is a CLI command to remove cache files and temporary files that related to Python.
+cleanpy is a CLI tool to remove caches and temporary files that related to Python.
 
 .. image:: https://badge.fury.io/py/cleanpy.svg
     :target: https://badge.fury.io/py/cleanpy
