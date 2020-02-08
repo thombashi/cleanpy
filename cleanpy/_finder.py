@@ -30,7 +30,7 @@ class Finder:
 
         self.__target_map = self.__make_target_map()
         self.__exclude_pattern = re.compile(exclude_pattern) if exclude_pattern else None
-        self.__delete_entries: Set[DeleteEntry] = set([])
+        self.__delete_entries: Set[DeleteEntry] = set()
 
         logger.debug(f"exclude_pattern: {exclude_pattern}")
         logger.debug(f"include_categories: {include_categories}")

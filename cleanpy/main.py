@@ -137,7 +137,7 @@ def extract_log_level(log_level: int, dry_run: bool) -> int:
 
 
 def extract_categories(options) -> AbstractSet[str]:
-    category_set = set([Category.CACHE])
+    category_set = {Category.CACHE}
 
     if options.all:
         category_set |= set(Category.ALL)
