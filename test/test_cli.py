@@ -66,3 +66,74 @@ class Test_cli:
 
         assert re.search("removed 1 directories", runner.stderr) is None
         assert re.search("removed 1 files", runner.stderr) is not None
+
+    def test_normal_include_builds(self, tmpdir):
+        first_dir, second_dir = make_dirs(tmpdir)
+        runner = SubprocessRunner(
+            ["cleanpy", str(first_dir), str(second_dir), "--debug", "--include-builds"]
+        )
+        assert runner.run() == 0, runner.stderr
+
+        print_result(stdout=runner.stdout, stderr=runner.stderr)
+
+        assert re.search("removed 3 directories", runner.stderr) is not None
+
+    def test_normal_include_envs(self, tmpdir):
+        first_dir, second_dir = make_dirs(tmpdir)
+        runner = SubprocessRunner(
+            ["cleanpy", str(first_dir), str(second_dir), "--debug", "--include-envs"]
+        )
+        assert runner.run() == 0, runner.stderr
+
+        print_result(stdout=runner.stdout, stderr=runner.stderr)
+
+        assert re.search("removed 3 directories", runner.stderr) is not None
+
+    def test_normal_include_metadata(self, tmpdir):
+        first_dir, second_dir = make_dirs(tmpdir)
+        runner = SubprocessRunner(
+            ["cleanpy", str(first_dir), str(second_dir), "--debug", "--include-metadata"]
+        )
+        assert runner.run() == 0, runner.stderr
+
+        print_result(stdout=runner.stdout, stderr=runner.stderr)
+
+        assert re.search("removed 3 directories", runner.stderr) is not None
+
+    def test_normal_include_tests(self, tmpdir):
+        first_dir, second_dir = make_dirs(tmpdir)
+        runner = SubprocessRunner(
+            ["cleanpy", str(first_dir), str(second_dir), "--debug", "--include-tests"]
+        )
+        assert runner.run() == 0, runner.stderr
+
+        print_result(stdout=runner.stdout, stderr=runner.stderr)
+
+        assert re.search("removed 2 directories", runner.stderr) is not None
+        assert re.search("removed 1 files", runner.stderr) is not None
+
+    def test_normal_all(self, tmpdir):
+        first_dir, second_dir = make_dirs(tmpdir)
+        runner = SubprocessRunner(["cleanpy", str(first_dir), str(second_dir), "--debug", "-a"])
+        assert runner.run() == 0, runner.stderr
+
+        print_result(stdout=runner.stdout, stderr=runner.stderr)
+
+        assert re.search("removed 5 directories", runner.stderr) is not None
+        assert re.search("removed 1 files", runner.stderr) is not None
+
+
+def make_dirs(dir_obj):
+    first_dir = dir_obj.mkdir("first")
+    first_dir.mkdir("__pycache__")
+    first_dir.mkdir("build")
+    first_dir.mkdir("hoge.egg-info")
+
+    second_dir = dir_obj.mkdir("second")
+    second_dir.mkdir("__pycache__")
+    second_dir.mkdir(".tox")
+    f0 = second_dir.join("coverage.xml")
+
+    f0.write("dummy")
+
+    return (first_dir, second_dir)

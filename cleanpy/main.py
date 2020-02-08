@@ -47,12 +47,31 @@ def parse_option() -> Namespace:
 
     group = parser.add_argument_group("Remove Target")
     group.add_argument(
+        "-a",
+        "--all",
+        action="store_true",
+        default=False,
+        help="remove all of the caches and teporary fils.",
+    )
+    group.add_argument(
         "--include-builds",
         action="store_true",
         default=False,
         help="remove files/directories that related build: {}, docs/_build".format(
             ", ".join(BUILD_CACHE_DIRS)
         ),
+    )
+    group.add_argument(
+        "--include-envs", action="store_true", default=False, help="remove virtual environments."
+    )
+    group.add_argument(
+        "--include-metadata", action="store_true", default=False, help="remove metadata."
+    )
+    group.add_argument(
+        "--include-tests",
+        action="store_true",
+        default=False,
+        help="remove test results and coverage files.",
     )
     group.add_argument(
         "--exclude",
@@ -120,8 +139,18 @@ def extract_log_level(log_level: int, dry_run: bool) -> int:
 def extract_categories(options) -> AbstractSet[str]:
     category_set = set([Category.CACHE])
 
+    if options.all:
+        category_set |= set(Category.ALL)
+        return category_set
+
     if options.include_builds:
         category_set.add(Category.BUILD)
+    if options.include_envs:
+        category_set.add(Category.ENV)
+    if options.include_metadata:
+        category_set.add(Category.METADATA)
+    if options.include_tests:
+        category_set.add(Category.TEST)
 
     return category_set
 
