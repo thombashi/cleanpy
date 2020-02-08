@@ -5,7 +5,7 @@ from logging import Logger
 from os import DirEntry
 from typing import Dict
 
-from ._const import EntryType
+from ._const import EntryType, RemoveTarget
 
 
 class DirEntryManipulator:
@@ -35,9 +35,11 @@ class DirEntryManipulator:
 
         return EntryType.UNDELETABLE
 
-    def remove(self, entry: DirEntry) -> None:
+    def remove(self, entry: DirEntry, remove_target: RemoveTarget) -> None:
         if self.is_dir(entry):
-            self.__logger.info(f"remove directory: {entry.path}")
+            self.__logger.info(
+                f"remove directory [{remove_target.category} - {remove_target.name}]: {entry.path}"
+            )
             try:
                 if not self.__dry_run:
                     shutil.rmtree(entry.path)
@@ -48,7 +50,9 @@ class DirEntryManipulator:
             return
 
         if self.is_file(entry):
-            self.__logger.info(f"remove file: {entry.path}")
+            self.__logger.info(
+                f"remove file [{remove_target.category} - {remove_target.name}]: {entry.path}"
+            )
             try:
                 if not self.__dry_run:
                     os.remove(entry.path)

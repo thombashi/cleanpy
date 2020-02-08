@@ -1,7 +1,8 @@
 import enum
 import logging
 import re
-from typing import NamedTuple, Pattern
+from os import DirEntry
+from typing import NamedTuple, Pattern, Tuple
 
 
 @enum.unique
@@ -25,6 +26,9 @@ class Category:
     METADATA = "metadata"
     TEST = "test"
     ALL = [BUILD, CACHE, ENV, METADATA, TEST]
+
+
+DeleteEntry = Tuple[DirEntry, RemoveTarget]
 
 
 TARGETS = (

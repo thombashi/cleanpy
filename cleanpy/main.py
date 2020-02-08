@@ -146,9 +146,11 @@ def main():
         logger.debug(f"scan dir: {target_dir}")
         finder.traverse(target_dir)
 
-    for entry in finder.get_delete_entries():
+    for delete_entry in finder.get_delete_entries():
+        entry, remove_target = delete_entry
+
         try:
-            manipulator.remove(entry)
+            manipulator.remove(entry, remove_target)
         except OSError as e:
             logger.error(e)
 
