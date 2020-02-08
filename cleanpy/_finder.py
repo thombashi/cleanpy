@@ -27,9 +27,6 @@ class Finder:
         logger.debug(f"exclude_pattern: {exclude_pattern}")
         logger.debug(f"include_categories: {include_categories}")
 
-    def __is_remove_category(self, category: str) -> bool:
-        return category in self.__include_categories
-
     def is_remove_entry(self, entry: DirEntry) -> bool:
         for target in self.__target_map.get(self.__manipulator.get_entry_type(entry), []):
             if target.regexp.search(entry.name):
