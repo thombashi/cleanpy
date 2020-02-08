@@ -94,9 +94,15 @@ TARGETS = (
     ),
     RemoveTarget(
         category=Category.TEST,
-        name="test results",
+        name="coverage",
         target_type=EntryType.FILE,
-        regexp=re.compile("|".join([r"^\.coverage$", r"^coverage\.xml$", r"^nosetests\.xml$",])),
+        regexp=re.compile("|".join([r"^\.coverage$", r"^coverage\.xml$"])),
+    ),
+    RemoveTarget(
+        category=Category.TEST,
+        name="results",
+        target_type=EntryType.FILE,
+        regexp=re.compile("|".join([r"^nosetests\.xml$"])),
     ),
 )
 
