@@ -10,14 +10,6 @@ cleanpy is a CLI command to remove cache files and temporary files that related 
     :target: https://badge.fury.io/py/cleanpy
     :alt: PyPI package version
 
-.. image:: https://img.shields.io/pypi/pyversions/cleanpy.svg
-    :target: https://pypi.org/project/cleanpy
-    :alt: Supported Python versions
-
-.. image:: https://img.shields.io/pypi/implementation/cleanpy.svg
-    :target: https://pypi.org/project/cleanpy
-    :alt: Supported Python implementations
-
 .. image:: https://img.shields.io/travis/thombashi/cleanpy/master.svg?label=Linux/macOS%20CI
     :target: https://travis-ci.org/thombashi/cleanpy
     :alt: Linux/macOS CI status
@@ -31,6 +23,14 @@ Installation: pip
 ::
 
     pip install cleanpy
+
+.. image:: https://img.shields.io/pypi/pyversions/cleanpy.svg
+    :target: https://pypi.org/project/cleanpy
+    :alt: Supported Python versions
+
+.. image:: https://img.shields.io/pypi/implementation/cleanpy.svg
+    :target: https://pypi.org/project/cleanpy
+    :alt: Supported Python implementations
 
 Installation: snap
 --------------------------------------------
@@ -68,9 +68,9 @@ You can also remove additional files/directories if the following options are sp
 - ``--include-builds``:
     - ``build``
     - ``dist``
-    - ``docs/_build``: ``sphinx``
-    - ``*.manifest``: ``pyinstaller``
-    - ``*.spec``: ``pyinstaller``
+    - ``docs/_build``: ``[sphinx]``
+    - ``*.manifest``: ``[pyinstaller]``
+    - ``*.spec``: ``[pyinstaller]``
 - ``--include-envs``:
     - ``.nox``
     - ``.tox``
@@ -78,9 +78,9 @@ You can also remove additional files/directories if the following options are sp
 - ``--include-metadata``:
     - ``.eggs``
     - ``*.egg-info``
-    - ``pip-wheel-metadata``
     - ``.pyre``
     - ``.pytype``
+    - ``pip-wheel-metadata``
 - ``--include-tests``:
     - ``.coverage``
     - ``coverage.xml``
