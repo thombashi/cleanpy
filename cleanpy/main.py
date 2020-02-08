@@ -44,10 +44,12 @@ def parse_option() -> Namespace:
         "--follow-symlinks", action="store_true", default=False, help="follow symlinks"
     )
     parser.add_argument(
-        "--include-build-cache",
+        "--include-builds",
         action="store_true",
         default=False,
-        help="remove build cache directories: {}, docs/_build".format(", ".join(BUILD_CACHE_DIRS)),
+        help="remove files/directories that related build: {}, docs/_build".format(
+            ", ".join(BUILD_CACHE_DIRS)
+        ),
     )
     parser.add_argument(
         "--exclude",
@@ -116,7 +118,7 @@ def extract_log_level(log_level: int, dry_run: bool) -> int:
 def extract_categories(options) -> AbstractSet[str]:
     category_set = set([Category.CACHE])
 
-    if options.include_build_cache:
+    if options.include_builds:
         category_set.add(Category.BUILD)
 
     return category_set
