@@ -95,6 +95,21 @@ Following directories are excluded from the search:
 - ``.svn``
 - ``node_modules``
 
+Execution example
+--------------------------------------------
+::
+
+    $ cleanpy -av .
+    [INFO] remove directory [cache - Python]: ./test/__pycache__
+    [INFO] remove directory [cache - pytest]: ./.pytest_cache
+    [INFO] remove directory [env - virtual env]: ./.tox
+    [INFO] remove directory [build - Python]: ./dist
+    [INFO] remove directory [cache - mypy]: ./.mypy_cache
+    [INFO] remove directory [metadata - type checker]: ./.pytype
+    [INFO] remove directory [build - Python]: ./build
+    [INFO] remove directory [metadata - Python]: ./cleanpy.egg-info
+    [INFO] removed 8 directories
+
 Command help
 --------------------------------------------
 ::
