@@ -35,6 +35,12 @@ TARGETS = (
         regexp=re.compile("|".join([r".+\.manifest$", r".+\.spec$",])),
     ),
     RemoveTarget(
+        category=Category.BUILD,
+        name="Python",
+        target_type=EntryType.DIR,
+        regexp=re.compile("|".join(["^build$", "^dist$",])),
+    ),
+    RemoveTarget(
         category=Category.CACHE,
         name="Python",
         target_type=EntryType.FILE,
