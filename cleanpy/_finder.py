@@ -4,7 +4,7 @@ from logging import Logger
 from os import DirEntry
 from typing import AbstractSet, Dict, List, Optional, Set
 
-from ._const import IGNORE_DIRS, RE_SPHINX_BUILD_DIR, TARGETS, Category, EntryType, RemoveTarget
+from ._const import IGNORE_DIRS, SPHINX_BUILD_TARGET, TARGETS, Category, EntryType, RemoveTarget
 from ._manipulator import DirEntryManipulator
 
 
@@ -33,7 +33,7 @@ class Finder:
                 return True
 
         if Category.BUILD in self.__include_categories:
-            if entry.name == "_build" and RE_SPHINX_BUILD_DIR.search(entry.path) is not None:
+            if entry.name == "_build" and SPHINX_BUILD_TARGET.regexp.search(entry.path) is not None:
                 return True
 
         return False

@@ -96,7 +96,12 @@ TARGETS = (
     ),
 )
 
-RE_SPHINX_BUILD_DIR = re.compile("docs/_build$")
+SPHINX_BUILD_TARGET = RemoveTarget(
+    category=Category.BUILD,
+    name="sphinx",
+    target_type=EntryType.DIR,
+    regexp=re.compile("|".join([r"docs/_build$"])),
+)
 
 IGNORE_DIRS = (".git", ".hg", ".svn", "node_modules")
 BUILD_CACHE_DIRS = ("build", "dist")
