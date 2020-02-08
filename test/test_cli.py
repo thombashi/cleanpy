@@ -38,12 +38,14 @@ class Test_cli:
         assert re.search("removed 1 files", runner.stderr) is not None
 
     def test_normal_multi_dir(self, tmpdir):
-        tmpdir.mkdir("first").mkdir("__pycache__")
-        tmpdir.mkdir("second").mkdir("__pycache__")
+        first_dir = tmpdir.mkdir("first")
+        first_dir.mkdir("__pycache__")
+        first_dir.mkdir("build")
 
-        runner = SubprocessRunner(
-            ["cleanpy", str(tmpdir.join("first")), str(tmpdir.join("second")), "-v"]
-        )
+        second_dir = tmpdir.mkdir("second")
+        second_dir.mkdir("__pycache__")
+
+        runner = SubprocessRunner(["cleanpy", str(first_dir), str(second_dir), "-v"])
         assert runner.run() == 0, runner.stderr
 
         print_result(stdout=runner.stdout, stderr=runner.stderr)
