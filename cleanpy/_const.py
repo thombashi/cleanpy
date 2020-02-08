@@ -78,6 +78,12 @@ TARGETS = (
     ),
     RemoveTarget(
         category=Category.METADATA,
+        name="pip",
+        target_type=EntryType.DIR,
+        regexp=re.compile("|".join([r"^pip-wheel-metadata$"])),
+    ),
+    RemoveTarget(
+        category=Category.METADATA,
         name="type checker",
         target_type=EntryType.DIR,
         regexp=re.compile("|".join([r"^\.pyre$", r"^\.pytype$",])),
