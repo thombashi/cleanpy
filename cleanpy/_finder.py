@@ -2,7 +2,7 @@ import os
 import re
 from logging import Logger
 from os import DirEntry
-from typing import AbstractSet, Dict, List, Optional, Sequence
+from typing import AbstractSet, Dict, List, Optional, Set
 
 from ._const import IGNORE_DIRS, RE_SPHINX_BUILD_DIR, TARGETS, Category, EntryType, RemoveTarget
 from ._manipulator import DirEntryManipulator
@@ -22,7 +22,7 @@ class Finder:
 
         self.__target_map = self.__make_target_map()
         self.__exclude_pattern = re.compile(exclude_pattern) if exclude_pattern else None
-        self.__delete_entries: List[DirEntry] = []
+        self.__delete_entries: Set[DirEntry] = set([])
 
         logger.debug(f"exclude_pattern: {exclude_pattern}")
         logger.debug(f"include_categories: {include_categories}")
@@ -51,7 +51,10 @@ class Finder:
 
         return False
 
-    def traverse(self, root: str) -> Sequence[DirEntry]:
+    def get_delete_entries(self) -> AbstractSet[DirEntry]:
+        return self.__delete_entries
+
+    def traverse(self, root: str) -> AbstractSet[DirEntry]:
         with os.scandir(root) as it:
             for entry in it:
                 if self.is_skip_entry(entry):
@@ -60,7 +63,7 @@ class Finder:
 
                 if self.is_remove_entry(entry):
                     self.__logger.debug(f"add delete target: {entry.path}")
-                    self.__delete_entries.append(entry)
+                    self.__delete_entries.add(entry)
                     continue
 
                 if self.__manipulator.is_dir(entry):

@@ -136,13 +136,17 @@ def main():
         exclude_pattern=options.exclude,
         include_categories=extract_categories(options),
     )
+    target_dirs = set(options.target_dirs)
 
-    for target_dir in options.target_dirs:
+    logger.debug(f"target_dirs: {target_dirs}")
+
+    for target_dir in target_dirs:
         logger.debug(f"scan dir: {target_dir}")
+        finder.traverse(target_dir)
 
+    for entry in finder.get_delete_entries():
         try:
-            for entry in finder.traverse(target_dir):
-                manipulator.remove(entry)
+            manipulator.remove(entry)
         except OSError as e:
             logger.error(e)
 
