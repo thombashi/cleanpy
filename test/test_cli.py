@@ -15,14 +15,12 @@ def print_result(stdout, stderr, expected=None):
 class Test_cli:
     def test_normal_help(self, tmpdir):
         runner = SubprocessRunner(["cleanpy", "-h"])
-
-        assert runner.run() == 0
+        assert runner.run() == 0, runner.stderr
 
     @pytest.mark.parametrize(["log_level_option"], [["--debug"], ["--quiet"], ["--verbose"]])
     def test_normal_log_level(self, tmpdir, log_level_option):
         runner = SubprocessRunner(["cleanpy", str(tmpdir), log_level_option])
-
-        assert runner.run() == 0
+        assert runner.run() == 0, runner.stderr
 
     def test_normal_single_dir(self, tmpdir):
         p = tmpdir.mkdir("__pycache__").join("dummy.pyc")
@@ -32,7 +30,7 @@ class Test_cli:
         p.write("dummy")
 
         runner = SubprocessRunner(["cleanpy", str(tmpdir), "-v"])
-        assert runner.run() == 0
+        assert runner.run() == 0, runner.stderr
 
         print_result(stdout=runner.stdout, stderr=runner.stderr)
 
@@ -46,7 +44,7 @@ class Test_cli:
         runner = SubprocessRunner(
             ["cleanpy", str(tmpdir.join("first")), str(tmpdir.join("second")), "-v"]
         )
-        assert runner.run() == 0
+        assert runner.run() == 0, runner.stderr
 
         print_result(stdout=runner.stdout, stderr=runner.stderr)
 
@@ -60,7 +58,7 @@ class Test_cli:
         p.write("dummy")
 
         runner = SubprocessRunner(["cleanpy", str(tmpdir), "--exclude", "__pycache__", "-v"])
-        assert runner.run() == 0
+        assert runner.run() == 0, runner.stderr
 
         print_result(stdout=runner.stdout, stderr=runner.stderr)
 
