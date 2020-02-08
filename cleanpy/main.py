@@ -43,7 +43,10 @@ def parse_option() -> Namespace:
     parser.add_argument(
         "--follow-symlinks", action="store_true", default=False, help="follow symlinks"
     )
-    parser.add_argument(
+    parser.add_argument("--dry-run", action="store_true", default=False, help="do no harm.")
+
+    group = parser.add_argument_group("Remove Target")
+    group.add_argument(
         "--include-builds",
         action="store_true",
         default=False,
@@ -51,7 +54,7 @@ def parse_option() -> Namespace:
             ", ".join(BUILD_CACHE_DIRS)
         ),
     )
-    parser.add_argument(
+    group.add_argument(
         "--exclude",
         metavar="PATTERN",
         help=dedent(
@@ -61,7 +64,6 @@ def parse_option() -> Namespace:
             """
         ),
     )
-    parser.add_argument("--dry-run", action="store_true", default=False, help="do no harm.")
 
     loglevel_dest = "log_level"
     group = parser.add_mutually_exclusive_group()
