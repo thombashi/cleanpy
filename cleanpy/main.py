@@ -51,7 +51,7 @@ def parse_option() -> Namespace:
         "--all",
         action="store_true",
         default=False,
-        help="remove all of the caches and teporary fils.",
+        help="remove all of the caches and teporary files.",
     )
     group.add_argument(
         "--include-builds",
