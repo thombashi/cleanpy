@@ -69,6 +69,12 @@ TARGETS = (
         regexp=re.compile("|".join([r"^\.mypy_cache$",])),
     ),
     RemoveTarget(
+        category=Category.CACHE,
+        name="temporary files",
+        target_type=EntryType.FILE,
+        regexp=re.compile("|".join([r".+\.py\.[0-9a-z]{32}\.py$",])),
+    ),
+    RemoveTarget(
         category=Category.ENV,
         name="virtual env",
         target_type=EntryType.DIR,
