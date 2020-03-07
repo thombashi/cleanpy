@@ -68,7 +68,7 @@ def parse_option() -> Namespace:
         "--include-metadata", action="store_true", default=False, help="remove metadata."
     )
     group.add_argument(
-        "--include-tests",
+        "--include-testing",
         action="store_true",
         default=False,
         help="remove test results and coverage files.",
@@ -149,7 +149,7 @@ def extract_categories(options) -> AbstractSet[str]:
         category_set.add(Category.ENV)
     if options.include_metadata:
         category_set.add(Category.METADATA)
-    if options.include_tests:
+    if options.include_testing:
         category_set.add(Category.TESTING)
 
     return category_set

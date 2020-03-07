@@ -103,7 +103,7 @@ class Test_cli:
     def test_normal_include_tests(self, tmpdir):
         first_dir, second_dir = make_dirs(tmpdir)
         runner = SubprocessRunner(
-            ["cleanpy", str(first_dir), str(second_dir), "--debug", "--include-tests"]
+            ["cleanpy", str(first_dir), str(second_dir), "--debug", "--include-testing"]
         )
         assert runner.run() == 0, runner.stderr
 
