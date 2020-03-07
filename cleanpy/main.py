@@ -150,7 +150,7 @@ def extract_categories(options) -> AbstractSet[str]:
     if options.include_metadata:
         category_set.add(Category.METADATA)
     if options.include_tests:
-        category_set.add(Category.TEST)
+        category_set.add(Category.TESTING)
 
     return category_set
 

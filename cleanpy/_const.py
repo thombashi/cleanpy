@@ -24,8 +24,8 @@ class Category:
     CACHE = "cache"
     ENV = "env"
     METADATA = "metadata"
-    TEST = "test"
-    ALL = [BUILD, CACHE, ENV, METADATA, TEST]
+    TESTING = "testing"
+    ALL = [BUILD, CACHE, ENV, METADATA, TESTING]
 
 
 DeleteEntry = Tuple[DirEntry, RemoveTarget]
@@ -93,13 +93,13 @@ TARGETS = (
         regexp=re.compile("|".join([r"^\.pyre$", r"^\.pytype$",])),
     ),
     RemoveTarget(
-        category=Category.TEST,
+        category=Category.TESTING,
         name="coverage",
         target_type=EntryType.FILE,
         regexp=re.compile("|".join([r"^\.coverage$", r"^coverage\.xml$"])),
     ),
     RemoveTarget(
-        category=Category.TEST,
+        category=Category.TESTING,
         name="results",
         target_type=EntryType.FILE,
         regexp=re.compile("|".join([r"^nosetests\.xml$"])),
