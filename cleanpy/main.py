@@ -83,6 +83,9 @@ def parse_option() -> Namespace:
             """
         ),
     )
+    group.add_argument(
+        "--exclude-envs", action="store_true", default=False, help="exclude virtual environments."
+    )
 
     loglevel_dest = "log_level"
     group = parser.add_mutually_exclusive_group()
@@ -141,7 +144,6 @@ def extract_categories(options) -> AbstractSet[str]:
 
     if options.all:
         category_set |= set(Category.ALL)
-        return category_set
 
     if options.include_builds:
         category_set.add(Category.BUILD)
@@ -151,6 +153,9 @@ def extract_categories(options) -> AbstractSet[str]:
         category_set.add(Category.METADATA)
     if options.include_testing:
         category_set.add(Category.TESTING)
+
+    if options.exclude_envs:
+        category_set.remove(Category.ENV)
 
     return category_set
 
