@@ -72,16 +72,16 @@ You can also remove additional files/directories if the following options are sp
     - ``*.manifest``: ``[pyinstaller]``
     - ``*.spec``: ``[pyinstaller]``
 - ``--include-envs``:
-    - ``.nox``
-    - ``.tox``
     - ``.venv``
 - ``--include-metadata``:
     - ``.eggs``
     - ``*.egg-info``
-    - ``.pyre``
-    - ``.pytype``
+    - ``.pyre/``
+    - ``.pytype/``
     - ``pip-wheel-metadata``
-- ``--include-tests``:
+- ``--include-testing``:
+    - ``.nox``
+    - ``.tox``
     - ``.coverage``
     - ``coverage.xml``
     - ``nosetests.xml``
@@ -99,10 +99,10 @@ Execution example
 --------------------------------------------
 ::
 
-    $ cleanpy -av .
+    $ cleanpy -av --exclude-envs .
     [INFO] remove directory [cache - Python]: ./test/__pycache__
     [INFO] remove directory [cache - pytest]: ./.pytest_cache
-    [INFO] remove directory [env - virtual env]: ./.tox
+    [INFO] remove directory [testing - manager]: ./.tox
     [INFO] remove directory [build - Python]: ./dist
     [INFO] remove directory [cache - mypy]: ./.mypy_cache
     [INFO] remove directory [metadata - type checker]: ./.pytype
@@ -116,7 +116,8 @@ Command help
 
     usage: cleanpy [-h] [-V] [--follow-symlinks] [--dry-run] [-a]
                 [--include-builds] [--include-envs] [--include-metadata]
-                [--include-tests] [--exclude PATTERN] [-v | --debug | --quiet]
+                [--include-testing] [--exclude PATTERN] [--exclude-envs]
+                [-v | --debug | --quiet]
                 DIR_PATH [DIR_PATH ...]
 
     Remove cache files and temporary files that related to Python.
@@ -136,14 +137,15 @@ Command help
     --quiet             suppress execution log messages.
 
     Remove Target:
-    -a, --all           remove all of the caches and teporary fils.
+    -a, --all           remove all of the caches and teporary files.
     --include-builds    remove files/directories that related build: build,
                         dist, docs/_build
     --include-envs      remove virtual environments.
     --include-metadata  remove metadata.
-    --include-tests     remove test results and coverage files.
+    --include-testing   remove test results and coverage files.
     --exclude PATTERN   a regular expression that matches files and directories
                         that should be excluded on recursive searches.
+    --exclude-envs      exclude virtual environments.
 
     Issue tracker: https://github.com/thombashi/cleanpy/issues
 
