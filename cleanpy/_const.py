@@ -72,7 +72,7 @@ TARGETS = (
         category=Category.ENV,
         name="virtual env",
         target_type=EntryType.DIR,
-        regexp=re.compile("|".join([r"^\.nox$", r"^\.tox$", r"^\.venv$",])),
+        regexp=re.compile("|".join([r"^\.venv$"])),
     ),
     RemoveTarget(
         category=Category.METADATA,
@@ -91,6 +91,12 @@ TARGETS = (
         name="type checker",
         target_type=EntryType.DIR,
         regexp=re.compile("|".join([r"^\.pyre$", r"^\.pytype$",])),
+    ),
+    RemoveTarget(
+        category=Category.TESTING,
+        name="manager",
+        target_type=EntryType.DIR,
+        regexp=re.compile("|".join([r"^\.nox$", r"^\.tox$"])),
     ),
     RemoveTarget(
         category=Category.TESTING,

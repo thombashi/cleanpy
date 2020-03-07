@@ -87,7 +87,7 @@ class Test_cli:
 
         print_result(stdout=runner.stdout, stderr=runner.stderr)
 
-        assert re.search("removed 3 directories", runner.stderr) is not None
+        assert re.search("removed 2 directories", runner.stderr) is not None
 
     def test_normal_include_metadata(self, tmpdir):
         first_dir, second_dir = make_dirs(tmpdir)
@@ -109,7 +109,7 @@ class Test_cli:
 
         print_result(stdout=runner.stdout, stderr=runner.stderr)
 
-        assert re.search("removed 2 directories", runner.stderr) is not None
+        assert re.search("removed 3 directories", runner.stderr) is not None
         assert re.search("removed 1 files", runner.stderr) is not None
 
     def test_normal_all(self, tmpdir):
