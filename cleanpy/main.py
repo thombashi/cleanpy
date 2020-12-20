@@ -120,7 +120,8 @@ def parse_option() -> Namespace:
 
 def get_logger(log_level: int) -> Logger:
     logging.basicConfig(
-        format="[%(levelname)s] %(message)s", datefmt="%Y-%m-%d %H:%M:%S",
+        format="[%(levelname)s] %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
     )
 
     logger = logging.getLogger(__name__)

@@ -36,19 +36,39 @@ TARGETS = (
         category=Category.BUILD,
         name="pyinstaller",
         target_type=EntryType.FILE,
-        regexp=re.compile("|".join([r".+\.manifest$", r".+\.spec$",])),
+        regexp=re.compile(
+            "|".join(
+                [
+                    r".+\.manifest$",
+                    r".+\.spec$",
+                ]
+            )
+        ),
     ),
     RemoveTarget(
         category=Category.BUILD,
         name="Python",
         target_type=EntryType.DIR,
-        regexp=re.compile("|".join(["^build$", "^dist$",])),
+        regexp=re.compile(
+            "|".join(
+                [
+                    "^build$",
+                    "^dist$",
+                ]
+            )
+        ),
     ),
     RemoveTarget(
         category=Category.CACHE,
         name="Python",
         target_type=EntryType.FILE,
-        regexp=re.compile("|".join([r".+\.py[co]$",])),
+        regexp=re.compile(
+            "|".join(
+                [
+                    r".+\.py[co]$",
+                ]
+            )
+        ),
     ),
     RemoveTarget(
         category=Category.CACHE,
@@ -60,19 +80,37 @@ TARGETS = (
         category=Category.CACHE,
         name="pytest",
         target_type=EntryType.DIR,
-        regexp=re.compile("|".join([r"^\.pytest_cache$",])),
+        regexp=re.compile(
+            "|".join(
+                [
+                    r"^\.pytest_cache$",
+                ]
+            )
+        ),
     ),
     RemoveTarget(
         category=Category.CACHE,
         name="mypy",
         target_type=EntryType.DIR,
-        regexp=re.compile("|".join([r"^\.mypy_cache$",])),
+        regexp=re.compile(
+            "|".join(
+                [
+                    r"^\.mypy_cache$",
+                ]
+            )
+        ),
     ),
     RemoveTarget(
         category=Category.CACHE,
         name="temporary files",
         target_type=EntryType.FILE,
-        regexp=re.compile("|".join([r".+\.py\.[0-9a-z]{32}\.py$",])),
+        regexp=re.compile(
+            "|".join(
+                [
+                    r".+\.py\.[0-9a-z]{32}\.py$",
+                ]
+            )
+        ),
     ),
     RemoveTarget(
         category=Category.ENV,
@@ -84,7 +122,14 @@ TARGETS = (
         category=Category.METADATA,
         name="Python",
         target_type=EntryType.DIR,
-        regexp=re.compile("|".join([r"^\.eggs", r".+\.egg-info$",])),
+        regexp=re.compile(
+            "|".join(
+                [
+                    r"^\.eggs",
+                    r".+\.egg-info$",
+                ]
+            )
+        ),
     ),
     RemoveTarget(
         category=Category.METADATA,
@@ -96,7 +141,14 @@ TARGETS = (
         category=Category.METADATA,
         name="type checker",
         target_type=EntryType.DIR,
-        regexp=re.compile("|".join([r"^\.pyre$", r"^\.pytype$",])),
+        regexp=re.compile(
+            "|".join(
+                [
+                    r"^\.pyre$",
+                    r"^\.pytype$",
+                ]
+            )
+        ),
     ),
     RemoveTarget(
         category=Category.TESTING,
