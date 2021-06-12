@@ -1,4 +1,5 @@
 import re
+import sys
 
 import pytest
 from subprocrunner import SubprocessRunner
@@ -18,6 +19,9 @@ def print_result(stdout, stderr, expected=None):
 class Test_cli:
     def test_normal_help(self, tmpdir):
         runner = SubprocessRunner([MODULE, "-h"])
+        assert runner.run() == 0, runner.stderr
+
+        runner = SubprocessRunner([sys.executable, "-m", MODULE, "-h"])
         assert runner.run() == 0, runner.stderr
 
     @pytest.mark.parametrize(["log_level_option"], [["--debug"], ["--quiet"], ["--verbose"]])
