@@ -4,6 +4,9 @@ import pytest
 from subprocrunner import SubprocessRunner
 
 
+MODULE = "cleanpy"
+
+
 def print_result(stdout, stderr, expected=None):
     if expected:
         print(f"[expected]\n{expected}")
@@ -14,12 +17,12 @@ def print_result(stdout, stderr, expected=None):
 
 class Test_cli:
     def test_normal_help(self, tmpdir):
-        runner = SubprocessRunner(["cleanpy", "-h"])
+        runner = SubprocessRunner([MODULE, "-h"])
         assert runner.run() == 0, runner.stderr
 
     @pytest.mark.parametrize(["log_level_option"], [["--debug"], ["--quiet"], ["--verbose"]])
     def test_normal_log_level(self, tmpdir, log_level_option):
-        runner = SubprocessRunner(["cleanpy", str(tmpdir), log_level_option])
+        runner = SubprocessRunner([MODULE, str(tmpdir), log_level_option])
         assert runner.run() == 0, runner.stderr
 
     def test_normal_single_dir(self, tmpdir):
@@ -29,7 +32,7 @@ class Test_cli:
         p = tmpdir.join("test.pyc")
         p.write("dummy")
 
-        runner = SubprocessRunner(["cleanpy", str(tmpdir), "-v"])
+        runner = SubprocessRunner([MODULE, str(tmpdir), "-v"])
         assert runner.run() == 0, runner.stderr
 
         print_result(stdout=runner.stdout, stderr=runner.stderr)
@@ -45,7 +48,7 @@ class Test_cli:
         second_dir = tmpdir.mkdir("second")
         second_dir.mkdir("__pycache__")
 
-        runner = SubprocessRunner(["cleanpy", str(first_dir), str(second_dir), "-v"])
+        runner = SubprocessRunner([MODULE, str(first_dir), str(second_dir), "-v"])
         assert runner.run() == 0, runner.stderr
 
         print_result(stdout=runner.stdout, stderr=runner.stderr)
@@ -59,7 +62,7 @@ class Test_cli:
         p = tmpdir.join("test.pyc")
         p.write("dummy")
 
-        runner = SubprocessRunner(["cleanpy", str(tmpdir), "--exclude", "__pycache__", "-v"])
+        runner = SubprocessRunner([MODULE, str(tmpdir), "--exclude", "__pycache__", "-v"])
         assert runner.run() == 0, runner.stderr
 
         print_result(stdout=runner.stdout, stderr=runner.stderr)
@@ -70,7 +73,7 @@ class Test_cli:
     def test_normal_include_builds(self, tmpdir):
         first_dir, second_dir = make_dirs(tmpdir)
         runner = SubprocessRunner(
-            ["cleanpy", str(first_dir), str(second_dir), "--debug", "--include-builds"]
+            [MODULE, str(first_dir), str(second_dir), "--debug", "--include-builds"]
         )
         assert runner.run() == 0, runner.stderr
 
@@ -81,7 +84,7 @@ class Test_cli:
     def test_normal_include_envs(self, tmpdir):
         first_dir, second_dir = make_dirs(tmpdir)
         runner = SubprocessRunner(
-            ["cleanpy", str(first_dir), str(second_dir), "--debug", "--include-envs"]
+            [MODULE, str(first_dir), str(second_dir), "--debug", "--include-envs"]
         )
         assert runner.run() == 0, runner.stderr
 
@@ -92,7 +95,7 @@ class Test_cli:
     def test_normal_include_metadata(self, tmpdir):
         first_dir, second_dir = make_dirs(tmpdir)
         runner = SubprocessRunner(
-            ["cleanpy", str(first_dir), str(second_dir), "--debug", "--include-metadata"]
+            [MODULE, str(first_dir), str(second_dir), "--debug", "--include-metadata"]
         )
         assert runner.run() == 0, runner.stderr
 
@@ -103,7 +106,7 @@ class Test_cli:
     def test_normal_include_tests(self, tmpdir):
         first_dir, second_dir = make_dirs(tmpdir)
         runner = SubprocessRunner(
-            ["cleanpy", str(first_dir), str(second_dir), "--debug", "--include-testing"]
+            [MODULE, str(first_dir), str(second_dir), "--debug", "--include-testing"]
         )
         assert runner.run() == 0, runner.stderr
 
@@ -114,7 +117,7 @@ class Test_cli:
 
     def test_normal_all(self, tmpdir):
         first_dir, second_dir = make_dirs(tmpdir)
-        runner = SubprocessRunner(["cleanpy", str(first_dir), str(second_dir), "--debug", "-a"])
+        runner = SubprocessRunner([MODULE, str(first_dir), str(second_dir), "--debug", "-a"])
         assert runner.run() == 0, runner.stderr
 
         print_result(stdout=runner.stdout, stderr=runner.stderr)
