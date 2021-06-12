@@ -13,7 +13,7 @@ check:
 
 .PHONY: clean
 clean:
-	@-python setup.py clean --all
+	@-$(PYTHON) setup.py clean --all
 
 .PHONY: fmt
 fmt:
