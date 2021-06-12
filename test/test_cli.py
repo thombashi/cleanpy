@@ -125,6 +125,18 @@ class Test_cli:
         assert re.search("removed 5 directories", runner.stderr) is not None
         assert re.search("removed 1 files", runner.stderr) is not None
 
+    def test_normal_list(self, tmpdir):
+        first_dir, second_dir = make_dirs(tmpdir)
+        runner = SubprocessRunner([MODULE, "--list", str(first_dir), str(second_dir), "-a"])
+        assert runner.run() == 0, runner.stderr
+
+        print_result(stdout=runner.stdout, stderr=runner.stderr)
+
+        targets = runner.stdout.splitlines()
+        assert len(targets) == 6
+        for target in targets:
+            assert str(tmpdir) in target
+
 
 def make_dirs(dir_obj):
     first_dir = dir_obj.mkdir("first")

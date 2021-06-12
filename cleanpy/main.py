@@ -41,6 +41,13 @@ def parse_option() -> Namespace:
     )
 
     parser.add_argument(
+        "--list",
+        dest="listing",
+        action="store_true",
+        default=False,
+        help="print target directories/files. does not actually remove.",
+    )
+    parser.add_argument(
         "--follow-symlinks", action="store_true", default=False, help="follow symlinks."
     )
     parser.add_argument("--dry-run", action="store_true", default=False, help="do no harm.")
@@ -183,6 +190,10 @@ def main():
 
     for delete_entry in finder.get_delete_entries():
         entry, remove_target = delete_entry
+
+        if options.listing:
+            print(entry.path)
+            continue
 
         try:
             manipulator.remove(entry, remove_target)
