@@ -37,11 +37,11 @@ def parse_option() -> Namespace:
     parser.add_argument("-V", "--version", action="version", version="%(prog)s " + __version__)
 
     parser.add_argument(
-        "target_dirs", metavar="DIR_PATH", nargs="+", help="path to a root directory to search"
+        "target_dirs", metavar="DIR_PATH", nargs="+", help="path to a root directory to search."
     )
 
     parser.add_argument(
-        "--follow-symlinks", action="store_true", default=False, help="follow symlinks"
+        "--follow-symlinks", action="store_true", default=False, help="follow symlinks."
     )
     parser.add_argument("--dry-run", action="store_true", default=False, help="do no harm.")
 
