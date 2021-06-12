@@ -63,5 +63,5 @@ setuptools.setup(
         "Topic :: Utilities",
     ],
     cmdclass=get_release_command_class(),
-    entry_points={"console_scripts": ["cleanpy=cleanpy.main:main"]},
+    entry_points={"console_scripts": ["cleanpy=cleanpy.__main__:main"]},
 )
