@@ -10,9 +10,9 @@ cleanpy is a CLI tool to remove caches and temporary files that related to Pytho
     :target: https://badge.fury.io/py/cleanpy
     :alt: PyPI package version
 
-.. image:: https://img.shields.io/travis/thombashi/cleanpy/master.svg?label=Linux/macOS%20CI
-    :target: https://travis-ci.org/thombashi/cleanpy
-    :alt: Linux/macOS CI status
+.. image:: https://github.com/thombashi/cleanpy/actions/workflows/lint_and_test.yml/badge.svg
+    :target: https://github.com/thombashi/cleanpy/actions/workflows/lint_and_test.yml
+    :alt: Lint/Test result of Linux/macOS/Windows
 
 
 Installation
@@ -99,7 +99,7 @@ Execution example
 --------------------------------------------
 ::
 
-    $ cleanpy -av --exclude-envs .
+    $ cleanpy -avf --exclude-envs .
     [INFO] remove directory [cache - Python]: ./test/__pycache__
     [INFO] remove directory [cache - pytest]: ./.pytest_cache
     [INFO] remove directory [testing - manager]: ./.tox
@@ -114,38 +114,37 @@ Command help
 --------------------------------------------
 ::
 
-    usage: cleanpy [-h] [-V] [--follow-symlinks] [--dry-run] [-a]
-                [--include-builds] [--include-envs] [--include-metadata]
-                [--include-testing] [--exclude PATTERN] [--exclude-envs]
-                [-v | --debug | --quiet]
-                DIR_PATH [DIR_PATH ...]
+    usage: cleanpy [-h] [-V] [--list] [-f] [--follow-symlinks] [--dry-run] [-a] [--include-builds] [--include-envs]
+                   [--include-metadata] [--include-testing] [--exclude PATTERN] [--exclude-envs] [-v | --debug | --quiet]
+                   DIR_PATH [DIR_PATH ...]
 
     Remove cache files and temporary files that related to Python.
 
     Skip directories from recursive search: .git, .hg, .svn, node_modules
 
     positional arguments:
-    DIR_PATH            path to a root directory to search
+      DIR_PATH            path to a root directory to search.
 
     optional arguments:
-    -h, --help          show this help message and exit
-    -V, --version       show program's version number and exit
-    --follow-symlinks   follow symlinks
-    --dry-run           do no harm.
-    -v, --verbose       shows verbose output.
-    --debug             for debug print.
-    --quiet             suppress execution log messages.
+      -h, --help          show this help message and exit
+      -V, --version       show program's version number and exit
+      --list              print target directories/files. does not actually remove.
+      -f, --force         no prompt before remove.
+      --follow-symlinks   follow symlinks.
+      --dry-run           do no harm.
+      -v, --verbose       shows verbose output.
+      --debug             for debug print.
+      --quiet             suppress execution log messages.
 
     Remove Target:
-    -a, --all           remove all of the caches and teporary files.
-    --include-builds    remove files/directories that related build: build,
-                        dist, docs/_build
-    --include-envs      remove virtual environments.
-    --include-metadata  remove metadata.
-    --include-testing   remove test results and coverage files.
-    --exclude PATTERN   a regular expression that matches files and directories
-                        that should be excluded on recursive searches.
-    --exclude-envs      exclude virtual environments.
+      -a, --all           remove all of the caches and teporary files.
+      --include-builds    remove files/directories that related build: build, dist, docs/_build
+      --include-envs      remove virtual environments.
+      --include-metadata  remove metadata.
+      --include-testing   remove test results and coverage files.
+      --exclude PATTERN   a regular expression that matches files and directories that should be excluded on recursive
+                          searches.
+      --exclude-envs      exclude virtual environments.
 
     Issue tracker: https://github.com/thombashi/cleanpy/issues
 
