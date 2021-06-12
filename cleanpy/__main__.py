@@ -48,6 +48,9 @@ def parse_option() -> Namespace:
         help="print target directories/files. does not actually remove.",
     )
     parser.add_argument(
+        "-f", "--force", action="store_true", default=False, help="no prompt before remove."
+    )
+    parser.add_argument(
         "--follow-symlinks", action="store_true", default=False, help="follow symlinks."
     )
     parser.add_argument("--dry-run", action="store_true", default=False, help="do no harm.")
@@ -172,7 +175,10 @@ def main():
     options = parse_option()
     logger = get_logger(extract_log_level(options.log_level, options.dry_run))
     manipulator = DirEntryManipulator(
-        logger, follow_symlinks=options.follow_symlinks, dry_run=options.dry_run
+        logger,
+        force=options.force,
+        follow_symlinks=options.follow_symlinks,
+        dry_run=options.dry_run,
     )
     finder = Finder(
         logger,
