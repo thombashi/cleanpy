@@ -12,7 +12,7 @@ cleanpy is a CLI tool to remove caches and temporary files that related to Pytho
 
 .. image:: https://github.com/thombashi/cleanpy/actions/workflows/lint_and_test.yml/badge.svg
     :target: https://github.com/thombashi/cleanpy/actions/workflows/lint_and_test.yml
-    :alt: Lint/Test result of Linux/macOS/Windows
+    :alt: CI status of Linux/macOS/Windows
 
 
 Installation
