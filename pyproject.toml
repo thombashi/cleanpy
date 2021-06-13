@@ -49,3 +49,12 @@ skip_glob = [
     '*/.pytype/*',
     '*/.tox/*',
 ]
+
+[tool.mypy]
+ignore_missing_imports = true
+python_version = 3.6
+
+pretty = true
+show_error_codes = true
+show_error_context = true
+warn_unused_configs = true
