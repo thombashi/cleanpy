@@ -194,17 +194,20 @@ def main():
         logger.debug(f"scan dir: {target_dir}")
         finder.traverse(target_dir)
 
-    for delete_entry in finder.get_delete_entries():
-        entry, remove_target = delete_entry
+    try:
+        for delete_entry in finder.get_delete_entries():
+            entry, remove_target = delete_entry
 
-        if options.listing:
-            print(entry.path)
-            continue
+            if options.listing:
+                print(entry.path)
+                continue
 
-        try:
-            manipulator.remove(entry, remove_target)
-        except OSError as e:
-            logger.error(e)
+            try:
+                manipulator.remove(entry, remove_target)
+            except OSError as e:
+                logger.error(e)
+    except KeyboardInterrupt:
+        logger.warning("interrupted")
 
     for entry_type, count in manipulator.remove_count.items():
         logger.info(f"removed {count} {entry_type}")
