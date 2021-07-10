@@ -48,9 +48,6 @@ def parse_option() -> Namespace:
         help="print target directories/files. does not actually remove.",
     )
     parser.add_argument(
-        "-f", "--force", action="store_true", default=False, help="no prompt before remove."
-    )
-    parser.add_argument(
         "--follow-symlinks", action="store_true", default=False, help="follow symlinks."
     )
     parser.add_argument("--dry-run", action="store_true", default=False, help="do no harm.")
@@ -95,6 +92,25 @@ def parse_option() -> Namespace:
     )
     group_rm.add_argument(
         "--exclude-envs", action="store_true", default=False, help="exclude virtual environments."
+    )
+
+    interactive_dest = "interactive"
+    group_interactive = parser.add_mutually_exclusive_group()
+    group_interactive.add_argument(
+        "-i",
+        "--interactive",
+        dest=interactive_dest,
+        action="store_true",
+        default=False,
+        help="prompt before remove.",
+    )
+    group_interactive.add_argument(
+        "-f",
+        "--force",
+        dest=interactive_dest,
+        action="store_false",
+        default=False,
+        help="no prompt before remove.",
     )
 
     loglevel_dest = "log_level"
@@ -176,7 +192,7 @@ def main():
     logger = get_logger(extract_log_level(options.log_level, options.dry_run))
     manipulator = DirEntryManipulator(
         logger,
-        force=options.force,
+        interactive=options.interactive,
         follow_symlinks=options.follow_symlinks,
         dry_run=options.dry_run,
     )

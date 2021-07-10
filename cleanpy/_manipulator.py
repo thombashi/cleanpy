@@ -9,9 +9,9 @@ from ._const import EntryType, RemoveTarget
 
 
 class DirEntryManipulator:
-    def __init__(self, logger: Logger, force: bool, follow_symlinks: bool, dry_run: bool):
+    def __init__(self, logger: Logger, interactive: bool, follow_symlinks: bool, dry_run: bool):
         self.__logger = logger
-        self.__force = force
+        self.__interactive = interactive
         self.__follow_symlinks = follow_symlinks
         self.__dry_run = dry_run
 
@@ -72,7 +72,7 @@ class DirEntryManipulator:
         self.__logger.error(f"unknown entry: {entry.path}")
 
     def __prompt_remove(self, remove_path: str) -> bool:
-        if self.__force:
+        if not self.__interactive:
             return True
 
         response = input(f"Remove '{remove_path}'? [y/N]: ")
