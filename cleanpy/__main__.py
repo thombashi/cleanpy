@@ -98,8 +98,8 @@ def parse_option() -> Namespace:
     )
 
     loglevel_dest = "log_level"
-    group = parser.add_mutually_exclusive_group()
-    group.add_argument(
+    group_logging = parser.add_mutually_exclusive_group()
+    group_logging.add_argument(
         "-v",
         "--verbose",
         dest=loglevel_dest,
@@ -108,7 +108,7 @@ def parse_option() -> Namespace:
         default=LogLevel.DEFAULT,
         help="shows verbose output.",
     )
-    group.add_argument(
+    group_logging.add_argument(
         "--debug",
         dest=loglevel_dest,
         action="store_const",
@@ -116,7 +116,7 @@ def parse_option() -> Namespace:
         default=LogLevel.DEFAULT,
         help="for debug print.",
     )
-    group.add_argument(
+    group_logging.add_argument(
         "--quiet",
         dest=loglevel_dest,
         action="store_const",
