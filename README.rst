@@ -114,8 +114,8 @@ Command help
 --------------------------------------------
 ::
 
-    usage: cleanpy [-h] [-V] [--list] [-f] [--follow-symlinks] [--dry-run] [-a] [--include-builds] [--include-envs]
-                   [--include-metadata] [--include-testing] [--exclude PATTERN] [--exclude-envs] [-v | --debug | --quiet]
+     usage: cleanpy [-h] [-V] [--list] [--follow-symlinks] [--dry-run] [-a] [--include-builds] [--include-envs] [--include-metadata] [--include-testing]
+                   [--exclude PATTERN] [--exclude-envs] [-i | -f] [-v | --debug | --quiet]
                    DIR_PATH [DIR_PATH ...]
 
     Remove cache files and temporary files that related to Python.
@@ -129,9 +129,10 @@ Command help
       -h, --help          show this help message and exit
       -V, --version       show program's version number and exit
       --list              print target directories/files. does not actually remove.
-      -f, --force         no prompt before remove.
       --follow-symlinks   follow symlinks.
       --dry-run           do no harm.
+      -i, --interactive   prompt before remove.
+      -f, --force         no prompt before remove.
       -v, --verbose       shows verbose output.
       --debug             for debug print.
       --quiet             suppress execution log messages.
@@ -142,8 +143,7 @@ Command help
       --include-envs      remove virtual environments.
       --include-metadata  remove metadata.
       --include-testing   remove test results and coverage files.
-      --exclude PATTERN   a regular expression that matches files and directories that should be excluded on recursive
-                          searches.
+      --exclude PATTERN   a regular expression that matches files and directories that should be excluded on recursive searches.
       --exclude-envs      exclude virtual environments.
 
     Issue tracker: https://github.com/thombashi/cleanpy/issues
