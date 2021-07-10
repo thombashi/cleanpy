@@ -55,15 +55,15 @@ def parse_option() -> Namespace:
     )
     parser.add_argument("--dry-run", action="store_true", default=False, help="do no harm.")
 
-    group = parser.add_argument_group("Remove Target")
-    group.add_argument(
+    group_rm = parser.add_argument_group("Remove Target")
+    group_rm.add_argument(
         "-a",
         "--all",
         action="store_true",
         default=False,
         help="remove all of the caches and teporary files.",
     )
-    group.add_argument(
+    group_rm.add_argument(
         "--include-builds",
         action="store_true",
         default=False,
@@ -71,19 +71,19 @@ def parse_option() -> Namespace:
             ", ".join(BUILD_CACHE_DIRS)
         ),
     )
-    group.add_argument(
+    group_rm.add_argument(
         "--include-envs", action="store_true", default=False, help="remove virtual environments."
     )
-    group.add_argument(
+    group_rm.add_argument(
         "--include-metadata", action="store_true", default=False, help="remove metadata."
     )
-    group.add_argument(
+    group_rm.add_argument(
         "--include-testing",
         action="store_true",
         default=False,
         help="remove test results and coverage files.",
     )
-    group.add_argument(
+    group_rm.add_argument(
         "--exclude",
         metavar="PATTERN",
         help=dedent(
@@ -93,7 +93,7 @@ def parse_option() -> Namespace:
             """
         ),
     )
-    group.add_argument(
+    group_rm.add_argument(
         "--exclude-envs", action="store_true", default=False, help="exclude virtual environments."
     )
 
