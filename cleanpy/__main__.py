@@ -182,7 +182,7 @@ def extract_categories(options) -> AbstractSet[str]:
         category_set.add(Category.TESTING)
 
     if options.exclude_envs:
-        category_set.remove(Category.ENV)
+        category_set.discard(Category.ENV)
 
     return category_set
 
