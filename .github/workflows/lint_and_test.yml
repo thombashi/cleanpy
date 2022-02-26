@@ -84,4 +84,4 @@ jobs:
         run: make setup-ci
 
       - name: Run tests
-        run: tox -e py
+        run: make test
