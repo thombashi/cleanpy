@@ -36,7 +36,9 @@ setuptools.setup(
     url=REPOSITORY_URL,
     author=pkg_info["__author__"],
     author_email=pkg_info["__email__"],
-    description="cleanpy is a CLI tool to remove caches and temporary files that related to Python.",
+    description=(
+        "cleanpy is a CLI tool to remove caches and temporary files that related to Python."
+    ),
     include_package_data=True,
     keywords=["cleaner", "command"],
     license=pkg_info["__license__"],
