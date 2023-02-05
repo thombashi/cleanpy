@@ -164,7 +164,7 @@ def extract_log_level(log_level: int, dry_run: bool) -> int:
     return log_level
 
 
-def extract_categories(options) -> AbstractSet[str]:
+def extract_categories(options: Namespace) -> AbstractSet[str]:
     category_set = {Category.CACHE}
 
     if options.all:
