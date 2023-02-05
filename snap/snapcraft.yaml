@@ -1,5 +1,5 @@
 name: cleanpy
-base: core20
+base: core22
 version: git
 summary: CLI tool to remove caches and temporary files that related to Python.
 description: |
