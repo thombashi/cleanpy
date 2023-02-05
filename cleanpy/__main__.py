@@ -6,7 +6,7 @@ import logging
 from argparse import ArgumentParser, Namespace, RawDescriptionHelpFormatter
 from logging import Logger
 from textwrap import dedent
-from typing import AbstractSet
+from typing import AbstractSet, Optional
 
 from .__version__ import __version__
 from ._const import BUILD_CACHE_DIRS, IGNORE_DIRS, Category, LogLevel
@@ -193,6 +193,19 @@ def extract_categories(options: Namespace) -> AbstractSet[str]:
     return category_set
 
 
+def extract_exclude_pattern(options: Namespace) -> Optional[str]:
+    virtual_env_pattern = r"\.venv|\.tox|\.nox"
+    exclude_pattern = options.exclude
+
+    if options.exclude_envs:
+        if options.exclude:
+            exclude_pattern = f"{options.exclude}|{virtual_env_pattern}"
+        else:
+            exclude_pattern = virtual_env_pattern
+
+    return exclude_pattern
+
+
 def main():
     options = parse_option()
     logger = get_logger(extract_log_level(options.log_level, options.dry_run))
@@ -205,7 +218,7 @@ def main():
     finder = Finder(
         logger,
         manipulator=manipulator,
-        exclude_pattern=options.exclude,
+        exclude_pattern=extract_exclude_pattern(options),
         include_categories=extract_categories(options),
     )
     target_dirs = set(options.target_dirs)

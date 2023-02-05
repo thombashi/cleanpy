@@ -71,7 +71,7 @@ class Test_cli:
 
         print_result(stdout=runner.stdout, stderr=runner.stderr)
 
-        assert re.search("removed 1 directories", runner.stderr) is None
+        assert re.search("removed [0-9]+ directories", runner.stderr) is None
         assert re.search("removed 1 files", runner.stderr) is not None
 
     def test_normal_include_builds(self, tmpdir):
@@ -94,7 +94,27 @@ class Test_cli:
 
         print_result(stdout=runner.stdout, stderr=runner.stderr)
 
-        assert re.search("removed 2 directories", runner.stderr) is not None
+        assert re.search("removed 3 directories", runner.stderr) is not None
+
+    def test_normal_exclude_envs_with_exclude_pattern(self, tmpdir):
+        first_dir, second_dir = make_dirs(tmpdir)
+        runner = SubprocessRunner(
+            [
+                MODULE,
+                "-f",
+                str(first_dir),
+                str(second_dir),
+                "--debug",
+                "--exclude-envs",
+                "--exclude",
+                "__pycache__",
+            ]
+        )
+        assert runner.run() == 0, runner.stderr
+
+        print_result(stdout=runner.stdout, stderr=runner.stderr)
+
+        assert re.search("removed [0-9]+ directories", runner.stderr) is None
 
     def test_normal_include_metadata(self, tmpdir):
         first_dir, second_dir = make_dirs(tmpdir)
@@ -116,7 +136,7 @@ class Test_cli:
 
         print_result(stdout=runner.stdout, stderr=runner.stderr)
 
-        assert re.search("removed 3 directories", runner.stderr) is not None
+        assert re.search("removed 2 directories", runner.stderr) is not None
         assert re.search("removed 1 files", runner.stderr) is not None
 
     def test_normal_all(self, tmpdir):

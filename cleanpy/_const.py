@@ -116,7 +116,7 @@ TARGETS = (
         category=Category.ENV,
         name="virtual env",
         target_type=EntryType.DIR,
-        regexp=re.compile("|".join([r"^\.venv$"])),
+        regexp=re.compile("|".join([r"^\.venv$", r"^\.tox$", r"^\.nox$"])),
     ),
     RemoveTarget(
         category=Category.METADATA,
@@ -149,12 +149,6 @@ TARGETS = (
                 ]
             )
         ),
-    ),
-    RemoveTarget(
-        category=Category.TESTING,
-        name="manager",
-        target_type=EntryType.DIR,
-        regexp=re.compile("|".join([r"^\.nox$", r"^\.tox$"])),
     ),
     RemoveTarget(
         category=Category.TESTING,
