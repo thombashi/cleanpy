@@ -19,7 +19,7 @@ def parse_option() -> Namespace:
         formatter_class=RawDescriptionHelpFormatter,
         description=dedent(
             """\
-            Remove cache files and temporary files that related to Python.
+            Remove cache files and temporary files that are related to Python.
 
             Skip directories from recursive search: {}
             """.format(
@@ -43,7 +43,10 @@ def parse_option() -> Namespace:
         dest="listing",
         action="store_true",
         default=False,
-        help="print target directories/files. does not actually remove.",
+        help="""
+        print target directories/files.
+        this does not actually remove directories/files.
+        """,
     )
     parser.add_argument(
         "--follow-symlinks", action="store_true", default=False, help="follow symlinks."
@@ -56,18 +59,21 @@ def parse_option() -> Namespace:
         "--all",
         action="store_true",
         default=False,
-        help="remove all of the caches and teporary files.",
+        help="remove all of the caches and temporary files.",
     )
     group_rm.add_argument(
         "--include-builds",
         action="store_true",
         default=False,
-        help="remove files/directories that related build: {}, docs/_build".format(
+        help="remove files/directories that are related to build: {}, docs/_build".format(
             ", ".join(BUILD_CACHE_DIRS)
         ),
     )
     group_rm.add_argument(
-        "--include-envs", action="store_true", default=False, help="remove virtual environments."
+        "--include-envs",
+        action="store_true",
+        default=False,
+        help="remove virtual environment caches.",
     )
     group_rm.add_argument(
         "--include-metadata", action="store_true", default=False, help="remove metadata."
@@ -83,13 +89,15 @@ def parse_option() -> Namespace:
         metavar="PATTERN",
         help=dedent(
             """\
-            a regular expression that matches files and
-            directories that should be excluded on recursive searches.
+            a regular expression for files and directories to be excluded from the removes.
             """
         ),
     )
     group_rm.add_argument(
-        "--exclude-envs", action="store_true", default=False, help="exclude virtual environments."
+        "--exclude-envs",
+        action="store_true",
+        default=False,
+        help="exclude virtual environments from deletion.",
     )
 
     interactive_dest = "interactive"
@@ -100,7 +108,7 @@ def parse_option() -> Namespace:
         dest=interactive_dest,
         action="store_true",
         default=False,
-        help="prompt before remove.",
+        help="prompt on each file/directory delete.",
     )
     group_interactive.add_argument(
         "-f",
@@ -108,7 +116,7 @@ def parse_option() -> Namespace:
         dest=interactive_dest,
         action="store_false",
         default=False,
-        help="no prompt before remove.",
+        help="delete file/directory without prompt.",
     )
 
     loglevel_dest = "log_level"
@@ -120,7 +128,7 @@ def parse_option() -> Namespace:
         action="store_const",
         const=logging.INFO,
         default=LogLevel.DEFAULT,
-        help="shows verbose output.",
+        help="shows the verbose output.",
     )
     group_logging.add_argument(
         "--debug",
