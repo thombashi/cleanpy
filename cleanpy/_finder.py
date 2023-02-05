@@ -38,6 +38,9 @@ class Finder:
     def is_remove_entry(self, entry: DirEntry) -> Tuple[bool, Optional[RemoveTarget]]:
         for target in self.__target_map.get(self.__manipulator.get_entry_type(entry), []):
             if target.regexp.search(entry.name):
+                self.__logger.debug(
+                    f"match remove pattern: path={entry.path}, pattern={target.regexp.pattern}"
+                )
                 return (True, target)
 
         if Category.BUILD in self.__include_categories:
@@ -52,6 +55,7 @@ class Finder:
             return True
 
         if self.__manipulator.is_dir(entry) and entry.name in IGNORE_DIRS:
+            self.__logger.debug(f"match ignore dir: {entry.path}")
             return True
 
         return False
