@@ -4,7 +4,7 @@
 
 Summary
 ============================================
-cleanpy is a CLI tool to remove caches and temporary files that related to Python.
+``cleanpy`` is a CLI tool to remove caches and temporary files related to Python.
 
 .. image:: https://badge.fury.io/py/cleanpy.svg
     :target: https://badge.fury.io/py/cleanpy
@@ -53,7 +53,7 @@ Usage
 
     cleanpy DIR_PATH [DIR_PATH ...]
 
-``cleanpy`` will remove cache files and temporaly files under the DIR_PATH
+``cleanpy`` will remove cache files and temporary files under the DIR_PATH
 
 Remove files/directories are as follows:
 
@@ -77,6 +77,8 @@ You can also remove additional files/directories if the following options are sp
     - ``*.spec``: ``[pyinstaller]``
 - ``--include-envs``:
     - ``.venv``
+    - ``.nox``
+    - ``.tox``
 - ``--include-metadata``:
     - ``.eggs``
     - ``*.egg-info``
@@ -84,15 +86,13 @@ You can also remove additional files/directories if the following options are sp
     - ``.pytype/``
     - ``pip-wheel-metadata``
 - ``--include-testing``:
-    - ``.nox``
-    - ``.tox``
     - ``.coverage``
     - ``coverage.xml``
     - ``nosetests.xml``
 
-All of the above options are specified if set the ``--all`` option to the command.
+All the above options are specified if you use the ``--all`` option.
 
-Following directories are excluded from the search:
+The following directories are excluded from the remove:
 
 - ``.git``
 - ``.hg``
@@ -101,61 +101,53 @@ Following directories are excluded from the search:
 
 Execution example
 --------------------------------------------
+
+Clean the current directory except for virtual environments:
+
 ::
 
-    $ cleanpy -avf --exclude-envs .
-    [INFO] remove directory [cache - Python]: ./test/__pycache__
-    [INFO] remove directory [cache - pytest]: ./.pytest_cache
-    [INFO] remove directory [testing - manager]: ./.tox
-    [INFO] remove directory [build - Python]: ./dist
-    [INFO] remove directory [cache - mypy]: ./.mypy_cache
-    [INFO] remove directory [metadata - type checker]: ./.pytype
-    [INFO] remove directory [build - Python]: ./build
-    [INFO] remove directory [metadata - Python]: ./cleanpy.egg-info
-    [INFO] removed 8 directories
+    cleanpy --all --exclude-envs .
 
 Command help
 --------------------------------------------
 ::
 
-     usage: cleanpy [-h] [-V] [--list] [--follow-symlinks] [--dry-run] [-a] [--include-builds] [--include-envs] [--include-metadata] [--include-testing]
-                   [--exclude PATTERN] [--exclude-envs] [-i | -f] [-v | --debug | --quiet]
-                   DIR_PATH [DIR_PATH ...]
+    usage: cleanpy [-h] [-V] [--list] [--follow-symlinks] [--dry-run] [-a] [--include-builds] [--include-envs] [--include-metadata] [--include-testing] [--exclude PATTERN] [--exclude-envs] [-i | -f] [-v | --debug | --quiet] DIR_PATH [DIR_PATH ...]
 
-    Remove cache files and temporary files that related to Python.
+    Remove cache files and temporary files that are related to Python.
 
     Skip directories from recursive search: .git, .hg, .svn, node_modules
 
     positional arguments:
       DIR_PATH            path to a root directory to search.
 
-    optional arguments:
+    options:
       -h, --help          show this help message and exit
       -V, --version       show program's version number and exit
-      --list              print target directories/files. does not actually remove.
+      --list              print target directories/files. this does not actually remove directories/files.
       --follow-symlinks   follow symlinks.
       --dry-run           do no harm.
-      -i, --interactive   prompt before remove.
-      -f, --force         no prompt before remove.
-      -v, --verbose       shows verbose output.
+      -i, --interactive   prompt on each file/directory delete.
+      -f, --force         delete file/directory without prompt.
+      -v, --verbose       shows the verbose output.
       --debug             for debug print.
       --quiet             suppress execution log messages.
 
     Remove Target:
-      -a, --all           remove all of the caches and teporary files.
-      --include-builds    remove files/directories that related build: build, dist, docs/_build
-      --include-envs      remove virtual environments.
+      -a, --all           remove all of the caches and temporary files.
+      --include-builds    remove files/directories that are related to build: build, dist, docs/_build
+      --include-envs      remove virtual environment caches.
       --include-metadata  remove metadata.
       --include-testing   remove test results and coverage files.
-      --exclude PATTERN   a regular expression that matches files and directories that should be excluded on recursive searches.
-      --exclude-envs      exclude virtual environments.
+      --exclude PATTERN   a regular expression for files and directories to be excluded from the removes.
+      --exclude-envs      exclude virtual environments from deletion.
 
     Issue tracker: https://github.com/thombashi/cleanpy/issues
 
 
 Dependencies
 ============================================
-Python 3.6+
+Python 3.7+
 
 - no external package dependencies
 - platform independent
