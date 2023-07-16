@@ -53,15 +53,15 @@ Usage
 
     cleanpy DIR_PATH [DIR_PATH ...]
 
-``cleanpy`` will remove cache files and temporary files under the DIR_PATH
+``cleanpy`` will remove cache files and temporary files under the ``DIR_PATH``.
 
-Remove files/directories are as follows:
+Removing files or directories targets are as follows:
 
-- files:
+- Files to be deleted:
     - ``*.pyc``
     - ``*.pyo``
 
-- directories:
+- Directories to be deleted:
     - ``__pycache__``
     - ``.cache``
     - ``.mypy_cache``
@@ -70,29 +70,29 @@ Remove files/directories are as follows:
 You can also remove additional files/directories if the following options are specified:
 
 - ``--include-builds``:
-    - ``build``
-    - ``dist``
-    - ``docs/_build``: ``[sphinx]``
-    - ``*.manifest``: ``[pyinstaller]``
-    - ``*.spec``: ``[pyinstaller]``
+    - ``build`` directory
+    - ``dist`` directory
+    - ``docs/_build`` directory: ``[sphinx]``
+    - ``*.manifest`` files: ``[pyinstaller]``
+    - ``*.spec`` files: ``[pyinstaller]``
 - ``--include-envs``:
-    - ``.venv``
-    - ``.nox``
-    - ``.tox``
+    - ``.venv`` directory
+    - ``.nox`` directory
+    - ``.tox`` directory
 - ``--include-metadata``:
-    - ``.eggs``
-    - ``*.egg-info``
-    - ``.pyre/``
-    - ``.pytype/``
-    - ``pip-wheel-metadata``
+    - ``.eggs`` directory
+    - ``*.egg-info`` directories
+    - ``.pyre`` directory
+    - ``.pytype`` directory
+    - ``pip-wheel-metadata`` directory
 - ``--include-testing``:
-    - ``.coverage``
-    - ``coverage.xml``
-    - ``nosetests.xml``
+    - ``.coverage`` file
+    - ``coverage.xml`` file
+    - ``nosetests.xml`` file
 
 All the above options are specified if you use the ``--all`` option.
 
-The following directories are excluded from the remove:
+The following directories are always excluded from the remove:
 
 - ``.git``
 - ``.hg``
