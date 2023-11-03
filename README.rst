@@ -14,8 +14,8 @@ Summary
     :target: https://github.com/thombashi/cleanpy/actions/workflows/lint_and_test.yml
     :alt: CI status of Linux/macOS/Windows
 
-.. image:: https://github.com/thombashi/cleanpy/actions/workflows/codeql-analysis.yml/badge.svg
-    :target: https://github.com/thombashi/cleanpy/actions/workflows/codeql-analysis.yml
+.. image:: https://github.com/thombashi/cleanpy/actions/workflows/github-code-scanning/codeql/badge.svg
+    :target: https://github.com/thombashi/cleanpy/actions/workflows/github-code-scanning/codeql
     :alt: CodeQL
 
 
