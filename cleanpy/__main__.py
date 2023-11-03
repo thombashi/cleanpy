@@ -206,7 +206,7 @@ def extract_exclude_pattern(options: Namespace) -> Optional[str]:
     return exclude_pattern
 
 
-def main():
+def main() -> None:
     options = parse_option()
     logger = get_logger(extract_log_level(options.log_level, options.dry_run))
     manipulator = DirEntryManipulator(
