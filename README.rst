@@ -66,6 +66,7 @@ Removing files or directories targets are as follows:
     - ``.cache``
     - ``.mypy_cache``
     - ``.pytest_cache``
+    - ``.ruff_cache``
 
 You can also remove additional files/directories if the following options are specified:
 
