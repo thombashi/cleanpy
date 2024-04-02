@@ -107,7 +107,7 @@ TARGETS = (
         regexp=re.compile(
             "|".join(
                 [
-                    r"^\..ruff_cache$",
+                    r"^\.ruff_cache$",
                 ]
             )
         ),
