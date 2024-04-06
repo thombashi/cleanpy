@@ -12,6 +12,11 @@ jobs:
     container:
       image: ghcr.io/thombashi/python-ci:3.11
 
+    environment:
+      name: testpypi 
+    permissions:
+      id-token: write
+
     steps:
       - uses: actions/checkout@v4
 
