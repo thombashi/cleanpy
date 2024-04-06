@@ -44,8 +44,10 @@ class Finder:
                 return (True, target)
 
         if Category.BUILD in self.__include_categories:
+            # sphinx build path (docs/_build) is a special case
+            # because it is not a single directory name but a path.
             if entry.name == "_build" and SPHINX_BUILD_TARGET.regexp.search(entry.path) is not None:
-                return (True, target)
+                return (True, SPHINX_BUILD_TARGET)
 
         return (False, None)
 
