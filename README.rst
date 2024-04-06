@@ -2,21 +2,11 @@
    :backlinks: top
    :depth: 2
 
-Summary
+Introduction
 ============================================
 ``cleanpy`` is a CLI tool to remove caches and temporary files related to Python.
 
-.. image:: https://badge.fury.io/py/cleanpy.svg
-    :target: https://badge.fury.io/py/cleanpy
-    :alt: PyPI package version
-
-.. image:: https://github.com/thombashi/cleanpy/actions/workflows/lint_and_test.yml/badge.svg
-    :target: https://github.com/thombashi/cleanpy/actions/workflows/lint_and_test.yml
-    :alt: CI status of Linux/macOS/Windows
-
-.. image:: https://github.com/thombashi/cleanpy/actions/workflows/github-code-scanning/codeql/badge.svg
-    :target: https://github.com/thombashi/cleanpy/actions/workflows/github-code-scanning/codeql
-    :alt: CodeQL
+|PyPI pkg ver| |CI status| |CodeQL|
 
 
 Installation
@@ -28,13 +18,7 @@ Installation: pip
 
     pip install cleanpy
 
-.. image:: https://img.shields.io/pypi/pyversions/cleanpy.svg
-    :target: https://pypi.org/project/cleanpy
-    :alt: Supported Python versions
-
-.. image:: https://img.shields.io/pypi/implementation/cleanpy.svg
-    :target: https://pypi.org/project/cleanpy
-    :alt: Supported Python implementations
+|Supported Python versions| |Supported Python implementations|
 
 Installation: snap
 --------------------------------------------
@@ -152,3 +136,24 @@ Python 3.7+
 
 - no external package dependencies
 - platform independent
+
+
+.. |PyPI pkg ver| image:: https://badge.fury.io/py/cleanpy.svg
+    :target: https://badge.fury.io/py/cleanpy
+    :alt: PyPI package version
+
+.. |CI status| image:: https://github.com/thombashi/cleanpy/actions/workflows/lint_and_test.yml/badge.svg
+    :target: https://github.com/thombashi/cleanpy/actions/workflows/lint_and_test.yml
+    :alt: CI status of Linux/macOS/Windows
+
+.. |CodeQL| image:: https://github.com/thombashi/cleanpy/actions/workflows/github-code-scanning/codeql/badge.svg
+    :target: https://github.com/thombashi/cleanpy/actions/workflows/github-code-scanning/codeql
+    :alt: CodeQL
+
+.. |Supported Python| image:: https://img.shields.io/pypi/pyversions/cleanpy.svg
+    :target: https://pypi.org/project/cleanpy
+    :alt: Supported Python versions
+
+.. |Supported Python implementations| image:: https://img.shields.io/pypi/implementation/cleanpy.svg
+    :target: https://pypi.org/project/cleanpy
+    :alt: Supported Python implementations
