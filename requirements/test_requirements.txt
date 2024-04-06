@@ -1,2 +1,2 @@
 pytest
-subprocrunner
+subprocrunner>=2.0.1

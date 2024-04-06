@@ -41,6 +41,7 @@ class Test_cli:
 
         print_result(stdout=runner.stdout, stderr=runner.stderr)
 
+        assert runner.stderr
         assert re.search("removed 1 directories", runner.stderr) is not None
         assert re.search("removed 1 files", runner.stderr) is not None
 
@@ -57,6 +58,7 @@ class Test_cli:
 
         print_result(stdout=runner.stdout, stderr=runner.stderr)
 
+        assert runner.stderr
         assert re.search("removed 2 directories", runner.stderr) is not None
 
     def test_normal_exclude(self, tmpdir):
@@ -71,6 +73,7 @@ class Test_cli:
 
         print_result(stdout=runner.stdout, stderr=runner.stderr)
 
+        assert runner.stderr
         assert re.search("removed [0-9]+ directories", runner.stderr) is None
         assert re.search("removed 1 files", runner.stderr) is not None
 
@@ -90,6 +93,7 @@ class Test_cli:
 
         print_result(stdout=runner.stdout, stderr=runner.stderr)
 
+        assert runner.stderr
         assert re.search("removed 3 directories", runner.stderr) is not None
 
     def test_normal_include_envs(self, tmpdir):
@@ -101,6 +105,7 @@ class Test_cli:
 
         print_result(stdout=runner.stdout, stderr=runner.stderr)
 
+        assert runner.stderr
         assert re.search("removed 3 directories", runner.stderr) is not None
 
     def test_normal_exclude_envs_with_exclude_pattern(self, tmpdir):
@@ -121,6 +126,7 @@ class Test_cli:
 
         print_result(stdout=runner.stdout, stderr=runner.stderr)
 
+        assert runner.stderr
         assert re.search("removed [0-9]+ directories", runner.stderr) is None
 
     def test_normal_include_metadata(self, tmpdir):
@@ -139,6 +145,7 @@ class Test_cli:
 
         print_result(stdout=runner.stdout, stderr=runner.stderr)
 
+        assert runner.stderr
         assert re.search("removed 3 directories", runner.stderr) is not None
 
     def test_normal_include_tests(self, tmpdir):
@@ -157,6 +164,7 @@ class Test_cli:
 
         print_result(stdout=runner.stdout, stderr=runner.stderr)
 
+        assert runner.stderr
         assert re.search("removed 2 directories", runner.stderr) is not None
         assert re.search("removed 1 files", runner.stderr) is not None
 
@@ -167,6 +175,7 @@ class Test_cli:
 
         print_result(stdout=runner.stdout, stderr=runner.stderr)
 
+        assert runner.stderr
         assert re.search("removed 5 directories", runner.stderr) is not None
         assert re.search("removed 1 files", runner.stderr) is not None
 
@@ -177,6 +186,7 @@ class Test_cli:
 
         print_result(stdout=runner.stdout, stderr=runner.stderr)
 
+        assert runner.stdout
         targets = runner.stdout.splitlines()
         assert len(targets) == 6
         for target in targets:
