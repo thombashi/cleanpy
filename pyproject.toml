@@ -53,9 +53,33 @@ skip_glob = [
 
 [tool.mypy]
 ignore_missing_imports = true
-python_version = 3.7
+python_version = "3.7"
 
 pretty = true
 show_error_codes = true
 show_error_context = true
 warn_unused_configs = true
+
+[tool.pyright]
+exclude = [
+    "**/node_modules",
+    "**/__pycache__",
+    ".tox",
+    ".venv",
+    "_build",
+    "_sandbox",
+    "build",
+    "dist"
+]
+pythonVersion = "3.7"
+
+[tool.ruff]
+line-length = 100
+target-version = "py37"
+exclude = [
+    ".eggs/",
+    ".tox/",
+    "_sandbox/*",
+    "build/",
+    "docs/conf.py",
+]
