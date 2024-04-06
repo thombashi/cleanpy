@@ -21,17 +21,18 @@ fmt:
 
 .PHONY: release
 release:
-	@$(PYTHON) setup.py release --sign
-	@$(MAKE) clean
+	$(PYTHON) setup.py release --sign --verbose
+	$(MAKE) clean
 
 .PHONY: setup-ci
 setup-ci:
-	@$(PYTHON) -m pip install -q --disable-pip-version-check --upgrade tox
+	$(PYTHON) -m pip install -q --disable-pip-version-check --upgrade tox
 
 .PHONY: setup
-setup: setup-ci	@$(PYTHON) -m pip install -q --disable-pip-version-check --upgrade -e .[test] releasecmd
-	@$(PYTHON) -m pip check
+setup: setup-ci
+	$(PYTHON) -m pip install -q --disable-pip-version-check --upgrade -e .[test] releasecmd
+	$(PYTHON) -m pip check
 
 .PHONY: test
 test:
-	@$(PYTHON) -m tox -e py
+	$(PYTHON) -m tox -e py
