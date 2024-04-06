@@ -13,9 +13,10 @@ jobs:
       image: ghcr.io/thombashi/python-ci:3.11
 
     environment:
-      name: testpypi 
-    permissions:
-      id-token: write
+      name: testpypi
+      url: https://pypi.org/p/cleanpy
+    # permissions:
+    #   id-token: write
 
     steps:
       - uses: actions/checkout@v4
