@@ -19,7 +19,7 @@ def parse_option() -> Namespace:
         formatter_class=RawDescriptionHelpFormatter,
         description=dedent(
             """\
-            Remove cache files and temporary files that are related to Python.
+            cleanpy will remove cache files and temporary files under the DIR_PATH.
 
             Skip directories from recursive search: {}
             """.format(", ".join(IGNORE_DIRS))
