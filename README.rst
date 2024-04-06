@@ -99,7 +99,7 @@ Command help
 
     usage: cleanpy [-h] [-V] [--list] [--follow-symlinks] [--dry-run] [-a] [--include-builds] [--include-envs] [--include-metadata] [--include-testing] [--exclude PATTERN] [--exclude-envs] [-i | -f] [-v | --debug | --quiet] DIR_PATH [DIR_PATH ...]
 
-    Remove cache files and temporary files that are related to Python.
+    cleanpy will remove cache files and temporary files under the DIR_PATH.
 
     Skip directories from recursive search: .git, .hg, .svn, node_modules
 
@@ -142,15 +142,15 @@ Python 3.7+
     :target: https://badge.fury.io/py/cleanpy
     :alt: PyPI package version
 
-.. |CI status| image:: https://github.com/thombashi/cleanpy/actions/workflows/lint_and_test.yml/badge.svg
-    :target: https://github.com/thombashi/cleanpy/actions/workflows/lint_and_test.yml
+.. |CI status| image:: https://github.com/thombashi/cleanpy/actions/workflows/ci.yml/badge.svg
+    :target: https://github.com/thombashi/cleanpy/actions/workflows/ci.yml
     :alt: CI status of Linux/macOS/Windows
 
 .. |CodeQL| image:: https://github.com/thombashi/cleanpy/actions/workflows/github-code-scanning/codeql/badge.svg
     :target: https://github.com/thombashi/cleanpy/actions/workflows/github-code-scanning/codeql
     :alt: CodeQL
 
-.. |Supported Python| image:: https://img.shields.io/pypi/pyversions/cleanpy.svg
+.. |Supported Python versions| image:: https://img.shields.io/pypi/pyversions/cleanpy.svg
     :target: https://pypi.org/project/cleanpy
     :alt: Supported Python versions
 
