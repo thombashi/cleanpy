@@ -22,9 +22,7 @@ def parse_option() -> Namespace:
             Remove cache files and temporary files that are related to Python.
 
             Skip directories from recursive search: {}
-            """.format(
-                ", ".join(IGNORE_DIRS)
-            )
+            """.format(", ".join(IGNORE_DIRS))
         ),
         epilog=dedent(
             """\
@@ -35,7 +33,10 @@ def parse_option() -> Namespace:
     parser.add_argument("-V", "--version", action="version", version="%(prog)s " + __version__)
 
     parser.add_argument(
-        "target_dirs", metavar="DIR_PATH", nargs="+", help="path to a root directory to search."
+        "target_dirs",
+        metavar="DIR_PATH",
+        nargs="+",
+        help="path to a root directory to search.",
     )
 
     parser.add_argument(
@@ -76,7 +77,10 @@ def parse_option() -> Namespace:
         help="remove virtual environment caches.",
     )
     group_rm.add_argument(
-        "--include-metadata", action="store_true", default=False, help="remove metadata."
+        "--include-metadata",
+        action="store_true",
+        default=False,
+        help="remove metadata.",
     )
     group_rm.add_argument(
         "--include-testing",

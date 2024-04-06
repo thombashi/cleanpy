@@ -77,7 +77,14 @@ class Test_cli:
     def test_normal_include_builds(self, tmpdir):
         first_dir, second_dir = make_dirs(tmpdir)
         runner = SubprocessRunner(
-            [MODULE, "-f", str(first_dir), str(second_dir), "--debug", "--include-builds"]
+            [
+                MODULE,
+                "-f",
+                str(first_dir),
+                str(second_dir),
+                "--debug",
+                "--include-builds",
+            ]
         )
         assert runner.run() == 0, runner.stderr
 
@@ -119,7 +126,14 @@ class Test_cli:
     def test_normal_include_metadata(self, tmpdir):
         first_dir, second_dir = make_dirs(tmpdir)
         runner = SubprocessRunner(
-            [MODULE, "-f", str(first_dir), str(second_dir), "--debug", "--include-metadata"]
+            [
+                MODULE,
+                "-f",
+                str(first_dir),
+                str(second_dir),
+                "--debug",
+                "--include-metadata",
+            ]
         )
         assert runner.run() == 0, runner.stderr
 
@@ -130,7 +144,14 @@ class Test_cli:
     def test_normal_include_tests(self, tmpdir):
         first_dir, second_dir = make_dirs(tmpdir)
         runner = SubprocessRunner(
-            [MODULE, "-f", str(first_dir), str(second_dir), "--debug", "--include-testing"]
+            [
+                MODULE,
+                "-f",
+                str(first_dir),
+                str(second_dir),
+                "--debug",
+                "--include-testing",
+            ]
         )
         assert runner.run() == 0, runner.stderr
 

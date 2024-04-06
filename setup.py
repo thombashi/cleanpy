@@ -45,7 +45,11 @@ setuptools.setup(
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/x-rst",
     packages=setuptools.find_packages(exclude=["test*"]),
-    project_urls={"Source": REPOSITORY_URL, "Tracker": f"{REPOSITORY_URL:s}/issues"},
+    project_urls={
+        "Changlog": f"{REPOSITORY_URL:s}/releases",
+        "Source": REPOSITORY_URL,
+        "Tracker": f"{REPOSITORY_URL:s}/issues",
+    },
     python_requires=">=3.7",
     extras_require={"test": TESTS_REQUIRES},
     classifiers=[
