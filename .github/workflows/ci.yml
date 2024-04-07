@@ -12,9 +12,9 @@ jobs:
     container:
       image: ghcr.io/thombashi/python-ci:3.11
 
-    environment:
-      name: testpypi
-      url: https://pypi.org/p/cleanpy
+    # environment:
+    #   name: testpypi
+    #   url: https://pypi.org/p/cleanpy
 
     steps:
       - uses: actions/checkout@v4
