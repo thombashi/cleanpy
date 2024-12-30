@@ -46,7 +46,7 @@ setuptools.setup(
     long_description_content_type="text/x-rst",
     packages=setuptools.find_packages(exclude=["test*"]),
     project_urls={
-        "Changlog": f"{REPOSITORY_URL:s}/releases",
+        "Changelog": f"{REPOSITORY_URL:s}/releases",
         "Source": REPOSITORY_URL,
         "Tracker": f"{REPOSITORY_URL:s}/issues",
     },
