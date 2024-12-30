@@ -18,7 +18,7 @@ Installation: pip
 
     pip install cleanpy
 
-|Supported Python versions| |Supported Python implementations|
+|Supported Python implementations| |Supported Python versions|
 
 Installation: snap
 --------------------------------------------
@@ -97,7 +97,9 @@ Command help
 --------------------------------------------
 ::
 
-    usage: cleanpy [-h] [-V] [--list] [--follow-symlinks] [--dry-run] [-a] [--include-builds] [--include-envs] [--include-metadata] [--include-testing] [--exclude PATTERN] [--exclude-envs] [-i | -f] [-v | --debug | --quiet] DIR_PATH [DIR_PATH ...]
+    usage: cleanpy [-h] [-V] [--list] [--follow-symlinks] [--dry-run] [-a] [--include-builds] [--include-envs] [--include-metadata] [--include-testing] [--exclude PATTERN] [--exclude-envs] [-i | -f] [-v |
+                   --debug | --quiet]
+                   DIR_PATH [DIR_PATH ...]
 
     cleanpy will remove cache files and temporary files under the DIR_PATH.
 
@@ -111,7 +113,7 @@ Command help
       -V, --version       show program's version number and exit
       --list              print target directories/files. this does not actually remove directories/files.
       --follow-symlinks   follow symlinks.
-      --dry-run           do no harm.
+      --dry-run           don't actually do anything.
       -i, --interactive   prompt on each file/directory delete.
       -f, --force         delete file/directory without prompt.
       -v, --verbose       shows the verbose output.
