@@ -52,7 +52,9 @@ def parse_option() -> Namespace:
     parser.add_argument(
         "--follow-symlinks", action="store_true", default=False, help="follow symlinks."
     )
-    parser.add_argument("--dry-run", action="store_true", default=False, help="do no harm.")
+    parser.add_argument(
+        "--dry-run", action="store_true", default=False, help="don't actually do anything."
+    )
 
     group_rm = parser.add_argument_group("Remove Target")
     group_rm.add_argument(
