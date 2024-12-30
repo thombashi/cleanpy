@@ -41,7 +41,7 @@ jobs:
     timeout-minutes: 20
     environment:
       name: testpypi
-      url: https://pypi.org/p/cleanpy
+      url: https://test.pypi.org/p/cleanpy
     permissions:
       id-token: write
 
