@@ -2,7 +2,8 @@ import enum
 import logging
 import re
 from os import DirEntry
-from typing import NamedTuple, Pattern, Tuple
+from re import Pattern
+from typing import NamedTuple
 
 
 @enum.unique
@@ -28,7 +29,7 @@ class Category:
     ALL = [BUILD, CACHE, ENV, METADATA, TESTING]
 
 
-DeleteEntry = Tuple[DirEntry, RemoveTarget]
+DeleteEntry = tuple[DirEntry, RemoveTarget]
 
 
 TARGETS = (

@@ -3,7 +3,6 @@ import shutil
 from collections import defaultdict
 from logging import Logger
 from os import DirEntry
-from typing import Dict
 
 from ._const import EntryType, RemoveTarget
 
@@ -15,8 +14,8 @@ class DirEntryManipulator:
         self.__follow_symlinks = follow_symlinks
         self.__dry_run = dry_run
 
-        self.remove_count: Dict[str, int] = defaultdict(int)
-        self.error_count: Dict[str, int] = defaultdict(int)
+        self.remove_count: dict[str, int] = defaultdict(int)
+        self.error_count: dict[str, int] = defaultdict(int)
 
         logger.debug(f"follow_symlinks: {follow_symlinks}")
         logger.debug(f"dry run: {dry_run}")

@@ -2,7 +2,7 @@ import os
 import re
 from logging import Logger
 from os import DirEntry
-from typing import AbstractSet, Dict, List, Optional, Set, Tuple, cast
+from typing import AbstractSet, Optional, cast
 
 from ._const import (
     IGNORE_DIRS,
@@ -30,12 +30,12 @@ class Finder:
 
         self.__target_map = self.__make_target_map()
         self.__exclude_pattern = re.compile(exclude_pattern) if exclude_pattern else None
-        self.__delete_entries: Set[DeleteEntry] = set()
+        self.__delete_entries: set[DeleteEntry] = set()
 
         logger.debug(f"exclude_pattern: {exclude_pattern}")
         logger.debug(f"include_categories: {include_categories}")
 
-    def is_remove_entry(self, entry: DirEntry) -> Tuple[bool, Optional[RemoveTarget]]:
+    def is_remove_entry(self, entry: DirEntry) -> tuple[bool, Optional[RemoveTarget]]:
         for target in self.__target_map.get(self.__manipulator.get_entry_type(entry), []):
             if target.regexp.search(entry.name):
                 self.__logger.debug(
@@ -83,8 +83,8 @@ class Finder:
 
         return self.__delete_entries
 
-    def __make_target_map(self) -> Dict[EntryType, List[RemoveTarget]]:
-        target_map: Dict[EntryType, List[RemoveTarget]] = {}
+    def __make_target_map(self) -> dict[EntryType, list[RemoveTarget]]:
+        target_map: dict[EntryType, list[RemoveTarget]] = {}
 
         for target in TARGETS:
             if target.category not in self.__include_categories:
