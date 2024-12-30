@@ -19,7 +19,7 @@ exclude = '''
 | docs/conf.py
 '''
 line-length = 100
-target-version = ['py37', 'py38', 'py39', 'py310', 'py311']
+target-version = ['py39', 'py310', 'py311']
 
 [tool.coverage.run]
 branch = true
@@ -51,7 +51,7 @@ skip_glob = [
 
 [tool.mypy]
 ignore_missing_imports = true
-python_version = "3.7"
+python_version = "3.9"
 
 pretty = true
 show_error_codes = true
@@ -69,11 +69,11 @@ exclude = [
     "build",
     "dist"
 ]
-pythonVersion = "3.7"
+pythonVersion = "3.9"
 
 [tool.ruff]
 line-length = 100
-target-version = "py37"
+target-version = "py39"
 exclude = [
     ".eggs/",
     ".tox/",
