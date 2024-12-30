@@ -26,6 +26,7 @@ release:
 
 .PHONY: setup-ci
 setup-ci:
+	$(PYTHON) -m pip install -q --disable-pip-version-check --upgrade pip
 	$(PYTHON) -m pip install -q --disable-pip-version-check --upgrade tox
 
 .PHONY: setup
