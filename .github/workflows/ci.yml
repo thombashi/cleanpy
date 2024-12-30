@@ -20,7 +20,7 @@ jobs:
       group: ${{ github.event_name }}-${{ github.workflow }}-${{ github.ref_name }}-build-pkg
       cancel-in-progress: true
     container:
-      image: ghcr.io/thombashi/python-ci:3.11
+      image: ghcr.io/thombashi/python-ci:3.13
 
     steps:
     - uses: actions/checkout@v4
@@ -80,7 +80,7 @@ jobs:
       cancel-in-progress: true
     timeout-minutes: 20
     container:
-      image: ghcr.io/thombashi/python-ci:3.8
+      image: ghcr.io/thombashi/python-ci:3.13
 
     steps:
       - uses: actions/checkout@v4
