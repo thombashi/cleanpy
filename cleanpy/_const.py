@@ -3,7 +3,7 @@ import logging
 import re
 from os import DirEntry
 from re import Pattern
-from typing import NamedTuple
+from typing import Final, NamedTuple
 
 
 @enum.unique
@@ -21,12 +21,12 @@ class RemoveTarget(NamedTuple):
 
 
 class Category:
-    BUILD = "build"
-    CACHE = "cache"
-    ENV = "env"
-    METADATA = "metadata"
-    TESTING = "testing"
-    ALL = [BUILD, CACHE, ENV, METADATA, TESTING]
+    BUILD: Final = "build"
+    CACHE: Final = "cache"
+    ENV: Final = "env"
+    METADATA: Final = "metadata"
+    TESTING: Final = "testing"
+    ALL: Final = [BUILD, CACHE, ENV, METADATA, TESTING]
 
 
 DeleteEntry = tuple[DirEntry, RemoveTarget]
@@ -189,5 +189,5 @@ BUILD_CACHE_DIRS = ("build", "dist")
 
 
 class LogLevel:
-    DEFAULT = logging.WARNING
-    QUIET = logging.NOTSET
+    DEFAULT: Final = logging.WARNING
+    QUIET: Final = logging.NOTSET
