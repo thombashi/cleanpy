@@ -46,7 +46,7 @@ jobs:
       id-token: write
 
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v5
         with:
           name: dist
           path: ./dist
@@ -62,7 +62,7 @@ jobs:
       #    The name 'cleanpy' is too similar to an existing project. See https://test.pypi.org/help/#project-name for more information.
 
       - name: Sign the dists with Sigstore
-        uses: sigstore/gh-action-sigstore-python@v3.0.0
+        uses: sigstore/gh-action-sigstore-python@v3.0.1
         with:
           inputs: >-
             ./dist/*.tar.gz
