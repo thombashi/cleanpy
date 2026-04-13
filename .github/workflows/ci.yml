@@ -23,11 +23,11 @@ jobs:
       image: ghcr.io/thombashi/python-ci:3.13
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
 
     - run: make build
 
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v7
       with:
         name: dist
         path: ./dist/*
@@ -46,7 +46,7 @@ jobs:
       id-token: write
 
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: dist
           path: ./dist
@@ -62,13 +62,13 @@ jobs:
       #    The name 'cleanpy' is too similar to an existing project. See https://test.pypi.org/help/#project-name for more information.
 
       - name: Sign the dists with Sigstore
-        uses: sigstore/gh-action-sigstore-python@v3.0.0
+        uses: sigstore/gh-action-sigstore-python@v3.3.0
         with:
           inputs: >-
             ./dist/*.tar.gz
             ./dist/*.whl
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: sigstore
           path: ./dist/*
@@ -83,7 +83,7 @@ jobs:
       image: ghcr.io/thombashi/python-ci:3.13
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - run: make check
 
@@ -101,10 +101,10 @@ jobs:
     timeout-minutes: 20
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Setup Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
