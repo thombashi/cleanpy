@@ -193,6 +193,27 @@ class Test_cli:
             assert str(tmpdir) in target
 
 
+class Test_abnormal:
+    def test_abnormal_missing_dir(self, tmp_path):
+        import subprocess
+
+        valid = tmp_path / "valid"
+        valid.mkdir()
+        (valid / "__pycache__").mkdir()
+        missing = tmp_path / "does-not-exist"
+
+        result = subprocess.run(
+            [sys.executable, "-m", MODULE, "-f", str(valid), str(missing), "-v"],
+            capture_output=True,
+            text=True,
+        )
+
+        assert result.returncode == 0
+        assert "Traceback" not in result.stderr
+        assert missing.name in result.stderr
+        assert not (valid / "__pycache__").exists()
+
+
 def make_dirs(dir_obj):
     first_dir = dir_obj.mkdir("first")
     first_dir.mkdir("__pycache__")

@@ -233,7 +233,10 @@ def main() -> None:
 
     for target_dir in target_dirs:
         logger.debug(f"scan dir: {target_dir}")
-        finder.traverse(target_dir)
+        try:
+            finder.traverse(target_dir)
+        except OSError as e:
+            logger.error(e)
 
     try:
         for delete_entry in finder.get_delete_entries():
